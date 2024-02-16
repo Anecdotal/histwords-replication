@@ -79,7 +79,7 @@ bos_word = '-'
 
 COMBO_WORD = 'F'
 COMBO_FREQ = 0.4
-YEARS = 50
+YEARS = 20
 TXT_LEN = 100000
 
 # init transition probabilities for all words + bos
@@ -127,7 +127,7 @@ json.dump(params, json_file, indent = 4)
 json_file.close() 
 
 # save texts
-SENTENCE_LEN = 100
+SENTENCE_LEN = 500
 for year in range(YEARS):
 
     text_i = ts[year]

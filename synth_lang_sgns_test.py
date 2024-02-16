@@ -6,8 +6,6 @@ import numpy as np
 
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
-cYEARS = range(0, 50)
-
 class Sentences:
     """An iterator that yields sentences (lists of str)."""
 
@@ -22,19 +20,7 @@ class Sentences:
             articles = json.load(file)
 
             for ar in articles:
-                yield utils.simple_preprocess(ar['text'])
-
-models = {}
-
-for year in cYEARS:
-
-    path_i = "./synth_task/toy_lang_" + str(year) + ".json"
-
-    sentences = Sentences(path_i)
-
-    model = gensim.models.Word2Vec(vector_size=10, epochs=10, sentences=sentences, min_count=100)
-
-    models[year] = model
+                yield ar['text'].split()
 
 
 
@@ -146,22 +132,67 @@ def align_years(years):
         base_embed = aligned_embed
 
         print("Writing year:", year)
-        models[year + cYEARS[-1]] = aligned_embed
+        models[year + years[-1] + 1] = aligned_embed
         aligned_embed.wv.save_word2vec_format('./embeddings/toy_lang/sgns_vectors_' + str(year) + '.txt', binary=False)
 
-align_years(cYEARS) 
+# load parameters
+params = None
+with open('./synth_task/toy_lang_params.json') as file:
+    params = json.load(file)
+    
+fst, snd = params['combined_words']
+com = params['combo_word']
+cYEARS = range(params['years'])
+
+models = {}
+
+for year in cYEARS:
+
+    path_i = "./synth_task/toy_lang_" + str(year) + ".json"
+
+    sentences = Sentences(path_i)
+
+
+    model = gensim.models.Word2Vec(vector_size=12, epochs=6, sentences=sentences, min_count=100)
+
+    models[year] = model
 
 from numpy.linalg import norm
 def cos_sim(A, B):
     return np.dot(A,B)/(norm(A)*norm(B))
 
-fst = lambda year: models[year].wv['a']
-snd = lambda year: models[year].wv['b']
-combo = lambda year: models[year].wv['F']
+get_wv = lambda w: lambda year: models[year].wv[w]
 
-print("cosine sim (unaligned):", cos_sim(fst(0), fst(49)))
-print("cosine sim:", cos_sim(fst(50), fst(99)))
-print("cosine sim:", cos_sim(fst(50), snd(50)))
+def compare_cos(w1, w2, year):
+    wv1 = get_wv(w1)(year)
+    wv2 = get_wv(w2)(year)
+
+    return cos_sim(wv1, wv2)
+
+
+
+a_v = get_wv('a')
+combo = get_wv(com)
+print("cosine sim (unaligned):", cos_sim(a_v(cYEARS[0]), a_v(cYEARS[-1])))
+
+align_years(cYEARS) 
+
+y_fst = cYEARS[0] + cYEARS[-1] + 1
+y_lst = cYEARS[-1] + cYEARS[-1] + 1
+
+# TODO: loda parameters and use them instead of hardcoding
+print("cosine sim (a, a):", cos_sim(a_v(y_fst), a_v(y_lst)))
+print("cosine sim (F, F):", cos_sim(combo(y_fst), combo(y_lst)))
 print("...... now for combos ......")
-print("cosine sim:", cos_sim(combo(50), fst(50)))
-print("cosine sim:", cos_sim(combo(99), fst(99)))
+
+cos_sims_f = {}
+for year in [y_fst, y_lst]:
+    for w2 in [fst, snd, com]:
+        cos_sim_f = []
+        for word in params['words']:
+            cos_sim_f.append(compare_cos(word, w2, year))
+        
+        if w2 == com:
+            cos_sims_f[year] = cos_sim_f
+        
+        print("for", year, w2, "has similarities of:", cos_sim_f)
