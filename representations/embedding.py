@@ -34,6 +34,7 @@ class Embedding:
     @classmethod
     def load(cls, path, normalize=True, add_context=False, **kwargs):
         mat = np.load(path + "-w.npy", mmap_mode="c")
+        #print mat[(123,)]
         if add_context:
             mat += np.load(path + "-c.npy", mmap_mode="c")
         iw = load_pickle(path + "-vocab.pkl")

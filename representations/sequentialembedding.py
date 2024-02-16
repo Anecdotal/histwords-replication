@@ -11,6 +11,7 @@ class SequentialEmbedding:
     def load(cls, path, years, **kwargs):
         embeds = collections.OrderedDict()
         for year in years:
+            print "loading:", path + "/" + str(year)
             embeds[year] = Embedding.load(path + "/" + str(year), **kwargs)
         return SequentialEmbedding(embeds)
 
