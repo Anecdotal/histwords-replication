@@ -72,7 +72,7 @@ def generate_k_texts(words=[], probs={}, bos="", k = 50, text_length = 10000, co
 
         texts.append(" ".join(t))
 
-    return (midpoint, s, texts)
+    return (texts, combo_words, midpoint, s)
 
 words = ['a', 'b', 'c', 'd', 'e']
 bos_word = '-'
@@ -90,7 +90,7 @@ for word in words:
     pr[word] = get_probs()
 
 
-m, s, ts = generate_k_texts(words=words, 
+ts, combos, m, s = generate_k_texts(words=words, 
                       probs=pr, 
                       bos=bos_word, 
                       combo=True, 
@@ -113,6 +113,7 @@ params = {
     'probabilities': pr,
     'years': YEARS,
     'text_length': TXT_LEN,
+    'combined_words': combos,
     'combo_word': COMBO_WORD,
     'combo_freq': COMBO_FREQ,
     'm': m,
