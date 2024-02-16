@@ -1,4 +1,5 @@
 ### Make toy language with markov property
+import json
 import math
 import random
 
@@ -19,22 +20,10 @@ def get_probs(num_words=5):
         
     return prs
 
-
-words = ['a', 'b', 'c', 'd', 'e']
-bos_word = '-'
-
-pr = {}
-
-# init transition probabilities for all words + bos
-pr[bos_word] = get_probs()
-
-for word in words:
-    pr[word] = get_probs()
-
 # TBD: add Gaussian noise?
 
 ### Generate k years of 'text'
-def generate_k_texts(k = 50, text_length = 10000, combo=False, combo_word = 'F', combo_freq = 0.4):
+def generate_k_texts(words=[], probs={}, bos="", k = 50, text_length = 10000, combo=False, combo_word = 'F', combo_freq = 0.4):
 
     texts = []
 
@@ -54,9 +43,9 @@ def generate_k_texts(k = 50, text_length = 10000, combo=False, combo_word = 'F',
         t = []
         cur = bos_word
         for _ in range(text_length):
-            probs = pr[cur]
+            prob_next = probs[cur]
 
-            next = random.choices(words, weights=probs)[0]
+            next = random.choices(words, weights=prob_next)[0]
 
             t.append(next)
             cur = next
@@ -79,16 +68,77 @@ def generate_k_texts(k = 50, text_length = 10000, combo=False, combo_word = 'F',
 
                 if should_subst_first or should_subst_second:
 
-                    t[i] = combo_word
-            
+                    t[i] = combo_word   
 
         texts.append(" ".join(t))
 
-    return texts
+    return (midpoint, s, texts)
 
-ts = generate_k_texts(combo=True)
+words = ['a', 'b', 'c', 'd', 'e']
+bos_word = '-'
+
+COMBO_WORD = 'F'
+COMBO_FREQ = 0.4
+YEARS = 50
+TXT_LEN = 100000
+
+# init transition probabilities for all words + bos
+pr = {}
+pr[bos_word] = get_probs()
+
+for word in words:
+    pr[word] = get_probs()
+
+
+m, s, ts = generate_k_texts(words=words, 
+                      probs=pr, 
+                      bos=bos_word, 
+                      combo=True, 
+                      k=YEARS,
+                      text_length=TXT_LEN,
+                      combo_word=COMBO_WORD, 
+                      combo_freq=COMBO_FREQ)
 
 # show probabilities
 print("probabilities:")
 for word in words:
     print(word, "::", pr[word])
+
+### SAVE TEXTS + PARAMETERS
+ 
+# parameters
+params = {
+    'words': words,
+    'bos': bos_word,
+    'probabilities': pr,
+    'years': YEARS,
+    'text_length': TXT_LEN,
+    'combo_word': COMBO_WORD,
+    'combo_freq': COMBO_FREQ,
+    'm': m,
+    's': s,
+}
+
+json_file = open("./synth_task/toy_lang_params.json", "w") 
+   
+json.dump(params, json_file, indent = 4) 
+   
+json_file.close() 
+
+# save texts
+SENTENCE_LEN = 100
+for year in range(YEARS):
+
+    text_i = ts[year]
+
+    text_json = [{'text': text_i[i : i + SENTENCE_LEN]} for i in range(int(TXT_LEN / SENTENCE_LEN))]
+
+    text_json_file = open("./synth_task/toy_lang_" + str(year) + ".json", "w")
+
+    json.dump(text_json, text_json_file, indent = 4) 
+   
+    text_json_file.close() 
+
+
+
+    
