@@ -1,8 +1,15 @@
 import numpy as np
 from multiprocessing import Queue, Process
 from argparse import ArgumentParser
+import cPickle as pickle
 
-from ioutils import load_pickle, write_pickle
+def write_pickle(data, filename):
+    fp = open(filename, "wb")
+    pickle.dump(data, fp)
+
+def load_pickle(filename):
+    fp = open(filename, "rb")
+    return pickle.load(fp)
 
 def worker(proc_num, queue, dir, count_dir, min_count):
     while True:
@@ -41,8 +48,8 @@ if __name__ == "__main__":
     parser.add_argument("dir")
     parser.add_argument("count_dir", help="Directory with count data.")
     parser.add_argument("--workers", type=int, help="Number of processes to spawn", default=5)
-    parser.add_argument("--start-year", type=int, default=2013)
-    parser.add_argument("--end-year", type=int, default=2023)
+    parser.add_argument("--start-year", type=int, default=0)
+    parser.add_argument("--end-year", type=int, default=19)
     parser.add_argument("--year-inc", type=int, default=1)
     parser.add_argument("--min-count", type=int, default=500)
     args = parser.parse_args()

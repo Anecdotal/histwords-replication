@@ -42,7 +42,7 @@ def generate_k_texts(words=[],
 
         # set shift params
         midpoint = random.choice(range(k))
-        s = random.uniform(0, k/2) / k
+        s = random.random()
 
         print("shift parameters: m =", midpoint, "& s = ", s)
 
@@ -90,11 +90,11 @@ words = ['a', 'b', 'c', 'd', 'e']
 bos_word = '-'
 
 COMBO_WORD = 'F'
-COMBO_FREQ = 0.4
+COMBO_FREQ = 0.5
 YEARS = 20
-TXT_LEN = 100000
+TXT_LEN = 10000
 
-USE_TRIGRAM = True
+USE_TRIGRAM = False
 
 # init transition probabilities for all words + bos
 pr = {}

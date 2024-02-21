@@ -4,7 +4,7 @@ import logging
 import json
 import numpy as np
 
-logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
+#logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
 class Sentences:
     """An iterator that yields sentences (lists of str)."""
@@ -143,8 +143,53 @@ with open('./synth_task/toy_lang_params.json') as file:
 fst, snd = params['combined_words']
 com = params['combo_word']
 cYEARS = range(params['years'])
+EPOCHS = 6
+INIT_LR = 0.08
+VECTOR_SIZE = 6
+
+losses_by_hyp = {}
 
 models = {}
+
+from gensim.models.callbacks import CallbackAny2Vec
+class callback(CallbackAny2Vec):
+    '''Callback to print loss after each epoch.'''
+
+    def __init__(self, eps, lr):
+        self.epoch = 0
+        self.loss_to_be_subbed = 0
+        self.total_epochs = eps
+        self.lr = lr
+
+    def on_epoch_end(self, model):
+        loss = model.get_latest_training_loss()
+        loss_now = loss - self.loss_to_be_subbed
+        self.loss_to_be_subbed = loss
+        print('Loss after epoch {}: {}'.format(self.epoch, loss_now))
+        # add final loss to grid search
+        losses_by_hyp[(self.epoch, self.lr)] = loss_now
+            
+        self.epoch += 1
+
+def grid_search_hyperparams(year, minLR, maxLR, num_lr_steps, eps):
+    path_i = "./synth_task/toy_lang_" + str(year) + ".json"
+
+    # train models for all ranges, combos of LR, Epochs
+    lr_step = (maxLR - minLR) / num_lr_steps
+    for lr in [minLR + i*lr_step for i in range(num_lr_steps)]:
+        sentences = Sentences(path_i)
+
+        model = gensim.models.Word2Vec(vector_size=VECTOR_SIZE, epochs=eps, alpha=lr,
+                                    sentences=sentences, min_count=1, compute_loss=True, sg=False,
+                                    callbacks=[callback(eps, lr)])
+        
+    # find hyperparams with best loss
+    best_eps, best_lr = min(losses_by_hyp, key=losses_by_hyp.get)
+    print("best hyperparams:", best_eps, "epochs &",  best_lr, "lr; with final loss of", losses_by_hyp[(best_eps, best_lr)])
+
+    return best_eps, best_lr
+    
+#EPOCHS, INIT_LR = grid_search_hyperparams(3, 0.001, 0.1, 20, 12)
 
 for year in cYEARS:
 
@@ -152,8 +197,9 @@ for year in cYEARS:
 
     sentences = Sentences(path_i)
 
-
-    model = gensim.models.Word2Vec(vector_size=12, epochs=6, sentences=sentences, min_count=100)
+    model = gensim.models.Word2Vec(vector_size=VECTOR_SIZE, epochs=EPOCHS, alpha=INIT_LR,
+                                   sentences=sentences, min_count=1, compute_loss=True, sg=False,
+                                   callbacks=[callback(EPOCHS, INIT_LR)])
 
     models[year] = model
 
@@ -171,7 +217,7 @@ def compare_cos(w1, w2, year):
 
 
 
-a_v = get_wv('a')
+a_v = get_wv(fst)
 combo = get_wv(com)
 print("cosine sim (unaligned):", cos_sim(a_v(cYEARS[0]), a_v(cYEARS[-1])))
 
@@ -187,12 +233,24 @@ print("...... now for combos ......")
 
 cos_sims_f = {}
 for year in [y_fst, y_lst]:
+    cos_sims = {}
     for w2 in [fst, snd, com]:
         cos_sim_f = []
         for word in params['words']:
-            cos_sim_f.append(compare_cos(word, w2, year))
+            cos_sim_f.append(round(compare_cos(word, w2, year), 3))
         
         if w2 == com:
             cos_sims_f[year] = cos_sim_f
         
+        cos_sims[w2] = cos_sim_f
+        
         print("for", year, w2, "has similarities of:", cos_sim_f)
+
+    print("comparing the pairs:")
+    for w in [fst, snd]:
+        com_sim = cos_sims[com]
+        w_sim = cos_sims[w]
+        sim_diffs = [round(w_sim[i] - com_sim[i], 3) for i in range(len(w_sim))]
+        print("for", year, w, "vs", com, ":", sim_diffs)
+    print("......")
+ 
