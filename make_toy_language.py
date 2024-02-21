@@ -23,7 +23,15 @@ def get_probs(num_words=5):
 # TBD: add Gaussian noise?
 
 ### Generate k years of 'text'
-def generate_k_texts(words=[], probs={}, bos="", k = 50, text_length = 10000, combo=False, combo_word = 'F', combo_freq = 0.4):
+def generate_k_texts(words=[], 
+                     probs={}, 
+                     bos="", 
+                     k = 50, 
+                     text_length = 10000, 
+                     combo=False, 
+                     combo_word = 'F', 
+                     combo_freq = 0.4, 
+                     trigram=False):
 
     texts = []
 
@@ -48,7 +56,11 @@ def generate_k_texts(words=[], probs={}, bos="", k = 50, text_length = 10000, co
             next = random.choices(words, weights=prob_next)[0]
 
             t.append(next)
-            cur = next
+            if trigram:
+                # NB: assumes one-char words
+                cur = cur[-1] + next
+            else:
+                cur = next
 
         # substitute combined word in if needed
         if combo:
@@ -82,13 +94,27 @@ COMBO_FREQ = 0.4
 YEARS = 20
 TXT_LEN = 100000
 
+USE_TRIGRAM = True
+
 # init transition probabilities for all words + bos
 pr = {}
 pr[bos_word] = get_probs()
 
 for word in words:
     pr[word] = get_probs()
+    
+    # for trigram model, add probabilities for bigrams
+    if USE_TRIGRAM:
+        # bigrams from bos
+        pr[bos_word + word] = get_probs()
 
+        # other bigrams
+        for word2 in words:
+            pr[word + word2] = get_probs()
+
+# show probabilities
+print("probabilities:")
+print(pr)
 
 ts, combos, m, s = generate_k_texts(words=words, 
                       probs=pr, 
@@ -97,12 +123,8 @@ ts, combos, m, s = generate_k_texts(words=words,
                       k=YEARS,
                       text_length=TXT_LEN,
                       combo_word=COMBO_WORD, 
-                      combo_freq=COMBO_FREQ)
-
-# show probabilities
-print("probabilities:")
-for word in words:
-    print(word, "::", pr[word])
+                      combo_freq=COMBO_FREQ,
+                      trigram=USE_TRIGRAM)
 
 ### SAVE TEXTS + PARAMETERS
  
