@@ -141,21 +141,17 @@ def intersection_align_gensim(m1, m2, words=None):
         
     return (m1,m2)
 
+# align all time slice models to final time slice
+# TODO: parameterize saving the unaligned models
 def align_years(years):
-    first_iter = True
-    base_embed = None
+    base_embed = models[years[-1]]
 
-    for year in years:
+    for year in years[:-1]:
 
         year_embed = models[year]
 
         print("Aligning year:", year)
-        if first_iter:
-            aligned_embed = year_embed
-            first_iter = False
-        else:
-            aligned_embed = smart_procrustes_align_gensim(base_embed, year_embed)
-        base_embed = aligned_embed
+        aligned_embed = smart_procrustes_align_gensim(base_embed, year_embed)
 
         print("Writing year:", year)
         models[year + 20] = aligned_embed
