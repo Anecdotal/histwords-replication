@@ -5,6 +5,8 @@ import logging
 import tempfile
 import json
 import numpy as np
+from numpy.linalg import norm
+import pandas as pd
 
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
@@ -26,18 +28,26 @@ class Headlines:
             for ar in articles:
                 yield utils.simple_preprocess(ar['headline'].encode('utf-8'))
 
-models = {}
 
-for year in cYEARS:
+from gensim.models.callbacks import CallbackAny2Vec
+class callback(CallbackAny2Vec):
+    '''Callback to print loss after each epoch.'''
 
-    path_i = "./headlines/nytimes_headlines_histwords_" + str(year) + ".json"
+    def __init__(self, eps, lr):
+        self.epoch = 0
+        self.loss_to_be_subbed = 0
+        self.total_epochs = eps
+        self.lr = lr
 
-    sentences = Headlines(path_i)
-
-    model = gensim.models.Word2Vec(sentences=sentences, min_count=10, workers=4)
-
-    models[year] = model
-
+    def on_epoch_end(self, model):
+        loss = model.get_latest_training_loss()
+        loss_now = loss - self.loss_to_be_subbed
+        self.loss_to_be_subbed = loss
+        print('Loss after epoch {}: {}'.format(self.epoch, loss_now))
+        # add final loss to grid search
+        losses_by_hyp[(self.epoch, self.lr)] = loss_now
+            
+        self.epoch += 1
 
 
 def smart_procrustes_align_gensim(base_embed, other_embed, words=None):
@@ -151,15 +161,149 @@ def align_years(years):
         models[year + 20] = aligned_embed
         aligned_embed.wv.save_word2vec_format('./embeddings/nytimes/sgns_vectors_' + str(year) + '.txt', binary=False)
 
-align_years(cYEARS) 
+EPOCHS = 16
+INIT_LR = 0.72
+VECTOR_SIZE = 16
 
-from numpy.linalg import norm
+# for 50 sized vectors, best ep, lr is (18, 0.47) -- but the word vectors seem like noise
+# for 100 sized vectors, best ep, lr is (16, 0.7) -- but the word vectors seem like noise
+# for 16 sized vectors, best ep, lr is (16, 0.72) -- but the word vectors seem like noise
+
+losses_by_hyp = {}
+
+models = {}
+
+def grid_search_hyperparams(year, minLR, maxLR, num_lr_steps, eps):
+    path_i = "./headlines/nytimes_headlines_histwords_" + str(year) + ".json"
+
+    # train models for all ranges, combos of LR, Epochs
+    lr_step = (maxLR - minLR) / num_lr_steps
+    for lr in [minLR + i*lr_step for i in range(num_lr_steps)]:
+        sentences = Headlines(path_i)
+
+        model = gensim.models.Word2Vec(vector_size=VECTOR_SIZE, epochs=eps, alpha=lr,
+                                    sentences=sentences, min_count=2, compute_loss=True, sg=False,
+                                    callbacks=[callback(eps, lr)])
+        
+    # find hyperparams with best loss
+    best_eps, best_lr = min(losses_by_hyp, key=losses_by_hyp.get)
+    print(losses_by_hyp)
+    print("best hyperparams:", best_eps, "epochs &",  best_lr, "lr; with final loss of", losses_by_hyp[(best_eps, best_lr)])
+
+    return best_eps, best_lr
+    
+#EPOCHS, INIT_LR = grid_search_hyperparams(2015, 0.002, 0.8, 20, 20)
+
+for year in cYEARS:
+
+    path_i = "./headlines/nytimes_headlines_histwords_" + str(year) + ".json"
+
+    sentences = Headlines(path_i)
+
+    model = gensim.models.Word2Vec(vector_size=VECTOR_SIZE, epochs=EPOCHS, alpha=INIT_LR,
+                                   sentences=sentences, min_count=2, compute_loss=True, sg=False,
+                                   callbacks=[callback(EPOCHS, INIT_LR)])
+
+    models[year] = model
+
 def cos_sim(A, B):
     return np.dot(A,B)/(norm(A)*norm(B))
 
-president = lambda year: models[year].wv['president']
-senator = lambda year: models[year].wv['song']
-obama = lambda year: models[year].wv['obama']
+wv_by_year = lambda word: lambda year: models[year].wv[word]
 
-print("cosine sim (unaligned):", cos_sim(president(2014), obama(2015)))
-print("cosine sim:", cos_sim(president(2034), obama(2035)))
+def compare_cos(w1, w2, year):
+    wv1 = wv_by_year(w1)(year)
+    wv2 = wv_by_year(w2)(year)
+
+    return cos_sim(wv1, wv2)
+
+# pre-alignment: loop through all years, check cosine similarity of sample words across each year
+cWORDS = ['president', 'senator', 'obama', 'trump', 'politics', 'mask', 'flu', 'sick', 'shutdown']
+
+com = 'president'
+cos_sims_f = {}
+for year in cYEARS:
+    cos_sims = {}
+    word = cWORDS[-1]
+    for w2 in cWORDS:
+        cos_sim_f = []
+        for word in cWORDS:
+            cos_sim_f.append(round(compare_cos(word, w2, year), 3))
+        
+        cos_sims[w2] = cos_sim_f
+
+        if w2 == com:
+            cos_sims_f[year] = cos_sim_f
+        
+        print("for", year, w2, "has similarities of:", cos_sim_f)
+
+    print("for pairs against president:")
+    for w in ['president', 'mask', 'shutdown']:
+        com_sim = cos_sims[com]
+        w_sim = cos_sims[w]
+        sim_diffs = [round(w_sim[i] - com_sim[i], 3) for i in range(len(w_sim))]
+        print("for", year, w, "vs", com, ":", sim_diffs)
+    print("......")
+
+print("between years for president:")
+
+between_years_df = pd.DataFrame(index=cYEARS, columns=cYEARS)
+wv_com = wv_by_year(com)
+
+for y1 in cYEARS:
+    for y2 in cYEARS:
+        between_years_df.at[y1, y2] = round(cos_sim(wv_com(y1), wv_com(y2)), 3)
+
+print(between_years_df.to_string)
+
+
+
+
+# ALIGNMENT
+align_years(cYEARS) 
+
+
+print("...POST ALIGNMENT...")
+# then do same test post-alignment
+
+wv_by_year2 = lambda word: lambda year: models[year + 20].wv[word]
+def compare_cos2(w1, w2, year):
+    wv1 = wv_by_year2(w1)(year)
+    wv2 = wv_by_year2(w2)(year)
+
+    return cos_sim(wv1, wv2)
+
+com = 'president'
+cos_sims_f = {}
+for year in cYEARS:
+    cos_sims = {}
+    word = cWORDS[-1]
+    for w2 in cWORDS:
+        cos_sim_f = []
+        for word in cWORDS:
+            cos_sim_f.append(round(compare_cos2(word, w2, year), 3))
+        
+        cos_sims[w2] = cos_sim_f
+
+        if w2 == com:
+            cos_sims_f[year] = cos_sim_f
+        
+        print("for", year, w2, "has similarities of:", cos_sim_f)
+
+    print("for pairs against president:")
+    for w in ['president', 'mask', 'shutdown']:
+        com_sim = cos_sims[com]
+        w_sim = cos_sims[w]
+        sim_diffs = [round(w_sim[i] - com_sim[i], 3) for i in range(len(w_sim))]
+        print("for", year, w, "vs", com, ":", sim_diffs)
+    print("......")
+
+print("between years for president:")
+between_years_df = pd.DataFrame(index=cYEARS, columns=cYEARS)
+wv_com = wv_by_year2(com)
+
+for y1 in cYEARS:
+    for y2 in cYEARS:
+        between_years_df.at[y1, y2] = round(cos_sim(wv_com(y1), wv_com(y2)), 3)
+
+print(between_years_df.to_string)
