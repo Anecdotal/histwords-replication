@@ -29,7 +29,7 @@ def generate_k_texts(words=[],
                      k = 50, 
                      text_length = 10000, 
                      combo=False, 
-                     combo_word = 'F', 
+                     combo_word = 'I', 
                      combo_freq = 0.4, 
                      trigram=False):
 
@@ -86,31 +86,33 @@ def generate_k_texts(words=[],
 
     return (texts, combo_words, midpoint, s)
 
-words = ['a', 'b', 'c', 'd', 'e']
+words = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
 bos_word = '-'
 
-COMBO_WORD = 'F'
+COMBO_WORD = 'I'
 COMBO_FREQ = 0.5
 YEARS = 20
 TXT_LEN = 10000
 
 USE_TRIGRAM = False
 
+num_words = len(words)
+
 # init transition probabilities for all words + bos
 pr = {}
-pr[bos_word] = get_probs()
+pr[bos_word] = get_probs(num_words)
 
 for word in words:
-    pr[word] = get_probs()
+    pr[word] = get_probs(num_words)
     
     # for trigram model, add probabilities for bigrams
     if USE_TRIGRAM:
         # bigrams from bos
-        pr[bos_word + word] = get_probs()
+        pr[bos_word + word] = get_probs(num_words)
 
         # other bigrams
         for word2 in words:
-            pr[word + word2] = get_probs()
+            pr[word + word2] = get_probs(num_words)
 
 # show probabilities
 print("probabilities:")

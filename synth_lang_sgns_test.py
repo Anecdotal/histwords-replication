@@ -3,6 +3,7 @@ import gensim.models
 import logging
 import json
 import numpy as np
+import pandas as pd
 
 #logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
@@ -116,40 +117,23 @@ def intersection_align_gensim(m1, m2, words=None):
     return (m1,m2)
 
 def align_years(years):
-    first_iter = True
-    base_embed = None
+    base_embed = models[years[-1]]
 
-    for year in years:
+    for year in years[:-1]:
 
         year_embed = models[year]
 
         print("Aligning year:", year)
-        if first_iter:
-            aligned_embed = year_embed
-            first_iter = False
-        else:
-            aligned_embed = smart_procrustes_align_gensim(base_embed, year_embed)
-        base_embed = aligned_embed
+        aligned_embed = smart_procrustes_align_gensim(base_embed, year_embed)
 
         print("Writing year:", year)
         models[year + years[-1] + 1] = aligned_embed
-        aligned_embed.wv.save_word2vec_format('./embeddings/toy_lang/sgns_vectors_' + str(year) + '.txt', binary=False)
+        aligned_embed.wv.save_word2vec_format('./embeddings/nytimes/sgns_vectors_' + str(year) + '.txt', binary=False)
 
-# load parameters
-params = None
-with open('./synth_task/toy_lang_params.json') as file:
-    params = json.load(file)
+    year = years[-1]
+    print("Writing year:", year)
+    models[year + years[-1] + 1] = base_embed
     
-fst, snd = params['combined_words']
-com = params['combo_word']
-cYEARS = range(params['years'])
-EPOCHS = 6
-INIT_LR = 0.08
-VECTOR_SIZE = 6
-
-losses_by_hyp = {}
-
-models = {}
 
 from gensim.models.callbacks import CallbackAny2Vec
 class callback(CallbackAny2Vec):
@@ -165,31 +149,57 @@ class callback(CallbackAny2Vec):
         loss = model.get_latest_training_loss()
         loss_now = loss - self.loss_to_be_subbed
         self.loss_to_be_subbed = loss
-        print('Loss after epoch {}: {}'.format(self.epoch, loss_now))
+        #print('Loss after epoch {}: {}'.format(self.epoch, loss_now))
+        
         # add final loss to grid search
-        losses_by_hyp[(self.epoch, self.lr)] = loss_now
+        if (self.epoch, self.lr) not in losses_by_hyp:
+            losses_by_hyp[(self.epoch, self.lr)] = 0.0
+        
+        losses_by_hyp[(self.epoch, self.lr)] += loss_now if loss_now > 0.0 else 100.0  
             
         self.epoch += 1
 
-def grid_search_hyperparams(year, minLR, maxLR, num_lr_steps, eps):
-    path_i = "./synth_task/toy_lang_" + str(year) + ".json"
+def grid_search_hyperparams(years, minLR, maxLR, num_lr_steps, eps):
+    
+    # search over all years to avoid overfitting on one year
+    print("grid searching:")
+    for year in years:
+        print(year, "...")
+        path_i = "./synth_task/toy_lang_" + str(year) + ".json"
 
-    # train models for all ranges, combos of LR, Epochs
-    lr_step = (maxLR - minLR) / num_lr_steps
-    for lr in [minLR + i*lr_step for i in range(num_lr_steps)]:
-        sentences = Sentences(path_i)
+        # train models for all ranges, combos of LR, Epochs
+        lr_step = (maxLR - minLR) / num_lr_steps
+        for lr in [minLR + i*lr_step for i in range(num_lr_steps)]:
+            sentences = Sentences(path_i)
 
-        model = gensim.models.Word2Vec(vector_size=VECTOR_SIZE, epochs=eps, alpha=lr,
-                                    sentences=sentences, min_count=1, compute_loss=True, sg=False,
-                                    callbacks=[callback(eps, lr)])
+            model = gensim.models.Word2Vec(vector_size=VECTOR_SIZE, epochs=eps, alpha=lr,
+                                        sentences=sentences, min_count=1, compute_loss=True, sg=False,
+                                        callbacks=[callback(eps, lr)])
         
     # find hyperparams with best loss
     best_eps, best_lr = min(losses_by_hyp, key=losses_by_hyp.get)
-    print("best hyperparams:", best_eps, "epochs &",  best_lr, "lr; with final loss of", losses_by_hyp[(best_eps, best_lr)])
+    print("best hyperparams:", best_eps, "epochs &",  best_lr, "lr; with final average loss of", losses_by_hyp[(best_eps, best_lr)] / len(years))
 
     return best_eps, best_lr
+
+# load parameters
+params = None
+with open('./synth_task/toy_lang_params.json') as file:
+    params = json.load(file)
+
+fst, snd = params['combined_words']
+com = params['combo_word']
+cYEARS = range(params['years'])
+cWORDS = params['words'] + [com]
+EPOCHS = 12
+INIT_LR = 0.078
+VECTOR_SIZE = 6
+
+losses_by_hyp = {}
+
+models = {}
     
-#EPOCHS, INIT_LR = grid_search_hyperparams(3, 0.001, 0.1, 20, 12)
+# EPOCHS, INIT_LR = grid_search_hyperparams(cYEARS, 0.001, 0.5, 20, 15)
 
 for year in cYEARS:
 
@@ -215,8 +225,6 @@ def compare_cos(w1, w2, year):
 
     return cos_sim(wv1, wv2)
 
-
-
 a_v = get_wv(fst)
 combo = get_wv(com)
 print("cosine sim (unaligned):", cos_sim(a_v(cYEARS[0]), a_v(cYEARS[-1])))
@@ -226,9 +234,8 @@ align_years(cYEARS)
 y_fst = cYEARS[0] + cYEARS[-1] + 1
 y_lst = cYEARS[-1] + cYEARS[-1] + 1
 
-# TODO: loda parameters and use them instead of hardcoding
-print("cosine sim (a, a):", cos_sim(a_v(y_fst), a_v(y_lst)))
-print("cosine sim (F, F):", cos_sim(combo(y_fst), combo(y_lst)))
+print("cosine sim first combo word:", cos_sim(a_v(y_fst), a_v(y_lst)))
+print("cosine sim combo with itself, years 1, 20:", cos_sim(combo(y_fst), combo(y_lst)))
 print("...... now for combos ......")
 
 cos_sims_f = {}
@@ -254,3 +261,46 @@ for year in [y_fst, y_lst]:
         print("for", year, w, "vs", com, ":", sim_diffs)
     print("......")
  
+ 
+print("...POST ALIGNMENT...")
+# then do same test post-alignment
+
+wv_by_year2 = lambda word: lambda year: models[year + cYEARS[-1] + 1].wv[word]
+def compare_cos2(w1, w2, year):
+    wv1 = wv_by_year2(w1)(year)
+    wv2 = wv_by_year2(w2)(year)
+
+    return cos_sim(wv1, wv2)
+
+cos_sims_f = {}
+for year in cYEARS:
+    cos_sims = {}
+    word = cWORDS[-1]
+    for w2 in cWORDS:
+        cos_sim_f = []
+        for word in cWORDS:
+            cos_sim_f.append(round(compare_cos2(word, w2, year), 3))
+        
+        cos_sims[w2] = cos_sim_f
+
+        if w2 == com:
+            cos_sims_f[year] = cos_sim_f
+        
+        print("for", year, w2, "has similarities of:", cos_sim_f)
+
+    print("for pairs against combo:")
+    for w in cWORDS:
+        com_sim = cos_sims[com]
+        w_sim = cos_sims[w]
+        sim_diffs = [round(w_sim[i] - com_sim[i], 3) for i in range(len(w_sim))]
+        print("for", year, w, "vs", com, ":", sim_diffs)
+    print("......")
+
+print("between years for combination char:")
+between_years_df = pd.DataFrame(index=cYEARS, columns=[cYEARS[-1]])
+wv_com = wv_by_year2(com)
+
+for y1 in cYEARS:
+    between_years_df.at[y1, cYEARS[-1]] = round(cos_sim(wv_com(y1), wv_com(cYEARS[-1])), 3)
+
+print(between_years_df.to_string)
