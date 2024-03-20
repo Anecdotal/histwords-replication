@@ -8,7 +8,7 @@ import numpy as np
 from numpy.linalg import norm
 import pandas as pd
 
-logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
+#logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
 cYEARS = range(2013, 2024)
 
@@ -70,7 +70,6 @@ def smart_procrustes_align_gensim(base_embed, other_embed, words=None):
     # make sure vocabulary and indices are aligned
     in_base_embed, in_other_embed = intersection_align_gensim(base_embed, other_embed, words=words)
 
-    
     # re-filling the normed vectors
     in_base_embed.wv.fill_norms(force=True)
     in_other_embed.wv.fill_norms(force=True)
@@ -156,6 +155,11 @@ def align_years(years):
         print("Writing year:", year)
         models[year + 20] = aligned_embed
         aligned_embed.wv.save_word2vec_format('./embeddings/nytimes/sgns_vectors_' + str(year) + '.txt', binary=False)
+
+    year = years[-1]
+    print("Writing year:", year)
+    models[year + 20] = base_embed
+    base_embed.wv.save_word2vec_format('./embeddings/nytimes/sgns_vectors_' + str(year) + '.txt', binary=False)
 
 EPOCHS = 16
 INIT_LR = 0.72
