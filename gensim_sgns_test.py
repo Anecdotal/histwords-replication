@@ -15,18 +15,23 @@ cYEARS = range(2013, 2024)
 class Headlines:
     """An iterator that yields sentences (lists of str)."""
 
-    path = "nytimes_headlines_histwords_2013.json"
+    path = ""
+    slice_pct = 1.0
 
-    def __init__(self, path):
+    def __init__(self, path, slice=1.0):
         self.path = path
+        self.slice_pct = slice
 
     def __iter__(self):
 
         with open(self.path) as file:
-            articles = json.load(file)
+            texts = json.load(file)
 
-            for ar in articles:
-                yield utils.simple_preprocess(ar['headline'].encode('utf-8'))
+            # only keep `slice_perc` % of texts
+            texts = texts[:int(self.slice_pct * (len(texts) + 1))]
+
+            for txt in texts:
+                yield utils.simple_preprocess(txt['headline'].encode('utf-8'))
 
 
 from gensim.models.callbacks import CallbackAny2Vec
@@ -43,7 +48,7 @@ class callback(CallbackAny2Vec):
         loss = model.get_latest_training_loss()
         loss_now = loss - self.loss_to_be_subbed
         self.loss_to_be_subbed = loss
-        print('Loss after epoch {}: {}'.format(self.epoch, loss_now))
+        #print('Loss after epoch {}: {}'.format(self.epoch, loss_now))
         # add final loss to grid search
         losses_by_hyp[(self.epoch, self.lr)] = loss_now
             
@@ -136,7 +141,7 @@ def intersection_align_gensim(m1, m2, words=None):
         m.wv.key_to_index = new_key_to_index
         m.wv.index_to_key = new_index_to_key
         
-        print(len(m.wv.key_to_index), len(m.wv.vectors))
+        #print(len(m.wv.key_to_index), len(m.wv.vectors))
         
     return (m1,m2)
 
@@ -149,21 +154,21 @@ def align_years(years):
 
         year_embed = models[year]
 
-        print("Aligning year:", year)
+        #print("Aligning year:", year)
         aligned_embed = smart_procrustes_align_gensim(base_embed, year_embed)
 
-        print("Writing year:", year)
+        #print("Writing year:", year)
         models[year + 20] = aligned_embed
         aligned_embed.wv.save_word2vec_format('./embeddings/nytimes/sgns_vectors_' + str(year) + '.txt', binary=False)
 
     year = years[-1]
-    print("Writing year:", year)
+    #print("Writing year:", year)
     models[year + 20] = base_embed
     base_embed.wv.save_word2vec_format('./embeddings/nytimes/sgns_vectors_' + str(year) + '.txt', binary=False)
 
 EPOCHS = 16
-INIT_LR = 0.72
-VECTOR_SIZE = 16
+INIT_LR = 0.7
+VECTOR_SIZE = 100
 
 # for 50 sized vectors, best ep, lr is (18, 0.47) -- but the word vectors seem like noise
 # for 100 sized vectors, best ep, lr is (16, 0.7) -- but the word vectors seem like noise
@@ -194,20 +199,42 @@ def grid_search_hyperparams(year, minLR, maxLR, num_lr_steps, eps):
     
 #EPOCHS, INIT_LR = grid_search_hyperparams(2015, 0.002, 0.8, 20, 20)
 
-for year in cYEARS:
+import time
 
-    path_i = "./headlines/nytimes_headlines_histwords_" + str(year) + ".json"
+for sl_pct in [1.0]: #float(10**x) * 1.0 for x in range(0)]:
 
-    sentences = Headlines(path_i)
+    total_wv_start = time.time()
 
-    model = gensim.models.Word2Vec(vector_size=VECTOR_SIZE, epochs=EPOCHS, alpha=INIT_LR,
-                                   sentences=sentences, min_count=2, compute_loss=True, sg=False,
-                                   callbacks=[callback(EPOCHS, INIT_LR)])
+    train_per_year = 0.0
 
-    models[year] = model
+    for year in cYEARS:
+
+        train_start = time.time()
+
+        path_i = "./headlines/nytimes_headlines_histwords_" + str(year) + ".json"
+
+        sentences = Headlines(path_i, slice=sl_pct)
+
+        model = gensim.models.Word2Vec(vector_size=VECTOR_SIZE, epochs=EPOCHS, alpha=INIT_LR,
+                                    sentences=sentences, min_count=2, compute_loss=True, sg=False,
+                                    callbacks=[callback(EPOCHS, INIT_LR)])
+
+        models[year] = model
+
+        train_per_year += time.time() - train_start
+
+    print("single year avg:", train_per_year / float(len(cYEARS)))
+
+    align_years(cYEARS) 
+
+    print("for", sl_pct, ":", time.time() - total_wv_start)
+    print("...................................")
+
+
 
 def cos_sim(A, B):
     return np.dot(A,B)/(norm(A)*norm(B))
+'''
 
 wv_by_year = lambda word: lambda year: models[year].wv[word]
 
@@ -255,7 +282,6 @@ for y1 in cYEARS:
         between_years_df.at[y1, y2] = round(cos_sim(wv_com(y1), wv_com(y2)), 3)
 
 print(between_years_df.to_string)
-
 
 
 
@@ -307,3 +333,37 @@ for y1 in cYEARS:
         between_years_df.at[y1, y2] = round(cos_sim(wv_com(y1), wv_com(y2)), 3)
 
 print(between_years_df.to_string)
+
+print("2023 shutdown vs. prev words:")
+between_years_df = pd.DataFrame(index=cWORDS, columns=cYEARS)
+wv_com_last = wv_by_year2('shutdown')(cYEARS[-1])
+
+for w1 in cWORDS:
+    wv_fst = wv_by_year2(w1)
+    for y2 in cYEARS:
+        between_years_df.at[w1, y2] = round(cos_sim(wv_fst(y2), wv_com_last), 3)
+
+print(between_years_df.to_string)
+
+print("2023 president vs. prev words:")
+between_years_df = pd.DataFrame(index=cWORDS, columns=cYEARS)
+wv_com_last = wv_by_year2('president')(cYEARS[-1])
+
+for w1 in cWORDS:
+    wv_fst = wv_by_year2(w1)
+    for y2 in cYEARS:
+        between_years_df.at[w1, y2] = round(cos_sim(wv_fst(y2), wv_com_last), 3)
+
+print(between_years_df.to_string)
+
+print("2023 mask vs. prev words:")
+between_years_df = pd.DataFrame(index=cWORDS, columns=cYEARS)
+wv_com_last = wv_by_year2('mask')(cYEARS[-1])
+
+for w1 in cWORDS:
+    wv_fst = wv_by_year2(w1)
+    for y2 in cYEARS:
+        between_years_df.at[w1, y2] = round(cos_sim(wv_fst(y2), wv_com_last), 3)
+
+print(between_years_df.to_string)
+'''
