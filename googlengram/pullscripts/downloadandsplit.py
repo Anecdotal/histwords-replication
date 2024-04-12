@@ -48,7 +48,7 @@ def split_main(proc_num, queue, download_dir):
         os.rmdir(loc_dir)
 
 def run_parallel(num_processes, out_dir, source):
-    page = requests.get("http://storage.googleapis.com/books/ngrams/books/datasetsv2.html")
+    page = requests.get("http://storage.googleapis.com/books/ngrams/books/datasetsv2.html", timeout=1)
     pattern = re.compile('href=\'(.*%s-%s-%s-.*\.gz)' % (source, TYPE, VERSION))
     urls = pattern.findall(page.text)
     del page
