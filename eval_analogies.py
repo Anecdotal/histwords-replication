@@ -164,11 +164,14 @@ def load_analogies(a_path):
 def load_models(models_path, static_path, model_years):
 
     models = {}
+
+    print("static", end="...", flush=True)
     
     static_model = KeyedVectors.load_word2vec_format(static_path, binary=False)
 
     for yr2 in model_years:
-        models[yr2] = KeyedVectors.load_word2vec_format(models_path + 'sgns_vectors_unaligned_' + str(yr2) + '.txt', binary=False)
+        print(yr2, end="...", flush=True)
+        models[yr2] = KeyedVectors.load_word2vec_format(models_path + 'sgns_vectors_unaligned_' + str(yr2) + '_041724.txt', binary=False)
 
         # align mod_y2 with y1
         for yr1 in range(model_years[0],yr2):
@@ -317,8 +320,9 @@ ts2_analogies = load_analogies(YAO_TS2_PATH)
 
 an_dict = pd.read_csv(SYZ_ANALOGIES_PATH)
 
-print("loading models......")
-models, static_model = load_models(STATIC_MPATH, MODELS_PATH, MODEL_YEARS)
+print("loading models......", end="", flush=True)
+models, static_model = load_models(MODELS_PATH, STATIC_MPATH, MODEL_YEARS)
+print("done loading models!")
 
 print(".......szymanski test...........")
 eval_szymanski_analogies(an_dict, models, static_model, MODEL_YEARS, TOP_KNN)
