@@ -1,6 +1,9 @@
 from gensim.models import KeyedVectors
 import csv
 import numpy as np
+from numpy.linalg import norm
+import pandas as pd
+import random
 # NB: should come from saved unaligned year-wise models
 
 
@@ -101,8 +104,8 @@ def eval_analogy(models_path, w1, y1, w2, y2, top_knn=1):
     # Original model only tested closest neighbor but given noisiness of word vectors this seems misguided.
 
     # load models
-    mod_y1 = KeyedVectors.load_word2vec_format(models_path + 'sgns_vectors_' + str(y1) + '.txt', binary=False)
-    mod_y2 = KeyedVectors.load_word2vec_format(models_path + 'sgns_vectors_' + str(y2) + '.txt', binary=False)
+    mod_y1 = KeyedVectors.load_word2vec_format(models_path + 'sgns_vectors_unaligned_' + str(y1) + '.txt', binary=False)
+    mod_y2 = KeyedVectors.load_word2vec_format(models_path + 'sgns_vectors_unaligned_' + str(y2) + '.txt', binary=False)
 
     # align mod_y2 with y1
     mod_y2_aligned = smart_procrustes_align_gensim(mod_y1, mod_y2)
@@ -116,6 +119,33 @@ def eval_analogy(models_path, w1, y1, w2, y2, top_knn=1):
     w2_preds = [wrd for wrd, _ in preds]
 
     print(w1, "vs.", w2_preds)
+    
+    return w2 in w2_preds
+
+def cos_sim(A, B):
+    return np.dot(A,B)/(norm(A)*norm(B))
+
+def eval_static(model, w1, w2, top_knn=10):
+    # top_knn chooses how many nearest neighbors to test against. 
+    # Original model only tested closest neighbor but given noisiness of word vectors this seems misguided.
+
+    # lookup word in y1
+    if not model.__contains__(w1) or not model.__contains__(w2):
+        return False
+    
+    wv1 = model.get_vector(w1)
+
+    # print distance between two words
+    print(w1, w2, ":", cos_sim(wv1, model.get_vector(w2)))
+
+    # find nearest neighbor in y2
+    preds = model.most_similar(wv1, topn=top_knn)
+
+    w2_preds = [wrd for wrd, _ in preds]
+
+    print("top-1:", w2_preds[0], ":", cos_sim(wv1, model.get_vector(w2_preds[0])))
+
+    print(w1, w2, "vs.", w2_preds)
     
     return w2 in w2_preds
 
@@ -134,9 +164,13 @@ def load_analogies(a_path):
     return analogies
 
 #### TEST ANALOGIES ###
-def eval_yao_analogies(analogies, models_path, model_years, top_knn=1):
+def eval_yao_analogies(analogies, models_path, model_years, top_knn=1, isStatic=False):
     acc_emb = 0.0
     acc_base = 0.0
+
+    # shuffle analogies
+    random.shuffle(analogies)
+
     for an1, an2 in analogies:
 
         w1, y1 = an1.split('-')
@@ -146,7 +180,10 @@ def eval_yao_analogies(analogies, models_path, model_years, top_knn=1):
 
         if y1 in model_years and y2 in model_years:
 
-            if eval_analogy(models_path, w1, y1, w2, y2, top_knn=top_knn):
+            eval = eval_static(KeyedVectors.load_word2vec_format(models_path, binary=False), w1, w2, top_knn) if isStatic else \
+                eval_analogy(models_path, w1, y1, w2, y2, top_knn=top_knn)
+
+            if eval:
                 acc_emb += 1
                 print("correct on", w1, w2, y1)
 
@@ -159,19 +196,19 @@ def eval_yao_analogies(analogies, models_path, model_years, top_knn=1):
     print("embeddings:", acc_emb)
     print("baseline:", acc_base)
 
-def eval_szymanski_analogies(analogies_dict, models_path, model_years, top_knn=1):
-    #
+def eval_szymanski_analogies(analogies_dict, models_path, model_years, top_knn=1, isStatic=False):
 
+    # ...
     years = analogies_dict["Year"]
 
     res_dict = {"total": 0, "final": (0.0, 0.0)}
 
-    for category in analogies_dict.keys()[1:]:
+    for category in analogies_dict.keys()[1:2]:
 
         category_res = [0.0, 0.0, 0]
         for y1 in range(len(years)):
 
-            for y2 in range(y1, len(years)):
+            for y2 in range(y1 + 1, len(years)):
 
                 if years[y1] in model_years and years[y2] in model_years:
 
@@ -179,9 +216,11 @@ def eval_szymanski_analogies(analogies_dict, models_path, model_years, top_knn=1
                     w2 = analogies_dict[category][y2]
                     category_res[2] += 1
 
-                    if eval_analogy(models_path, w1, y1, w2, y2, top_knn=top_knn):
-                        category_res[0] += 1
+                    eval = eval_static(KeyedVectors.load_word2vec_format(models_path, binary=False), w1, w2, top_knn) if isStatic else \
+                        eval_analogy(models_path, w1, years[y1], w2, years[y2], top_knn=top_knn)
 
+                    if eval:
+                        category_res[0] += 1
 
                     if eval_baseline(w1, w2):
                         category_res[1] += 1
@@ -199,12 +238,19 @@ def eval_szymanski_analogies(analogies_dict, models_path, model_years, top_knn=1
     return res_dict
 
 MODELS_PATH = './embeddings/nytimes-big/'
+STATIC_MPATH = './embeddings/nytimes-big/sgns_vectors_unaligned_all_years_041724.txt'
 ANALOGIES_PATH = './testset_1.csv'
-MODEL_YEARS = range(1986, 1997)
+SYZ_ANALOGIES_PATH = './szymanski_analogies.csv'
+MODEL_YEARS = range(1990, 2017)
 
-TOP_KNN = 1
+TOP_KNN = 10
 
 analogies = load_analogies(ANALOGIES_PATH)
 
-eval_yao_analogies(analogies, MODELS_PATH, MODEL_YEARS, TOP_KNN)
+an_dict = pd.read_csv(SYZ_ANALOGIES_PATH)
+
+#eval_szymanski_analogies(an_dict, MODELS_PATH, MODEL_YEARS, TOP_KNN)
+
+
+eval_yao_analogies(analogies, STATIC_MPATH, MODEL_YEARS, TOP_KNN, isStatic=True)
 
