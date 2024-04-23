@@ -99,15 +99,18 @@ def intersection_align_gensim(m1, m2, words=None):
 
 
 #### ANALOGY EVAL ####
-def eval_analogy(mod_y1, mod_y2_aligned, w1, y1, w2, y2, top_knn=1):
+def eval_analogy(mod_y1, mod_y2_aligned, w1, w2, top_knn=1):
     # top_knn chooses how many nearest neighbors to test against. 
-    # Original model only tested closest neighbor but given noisiness of word vectors this seems misguided.
+
+    # make sure words are in the model
+    if not mod_y1.__contains__(w1) or not mod_y2_aligned.__contains__(w1):
+        return False, 1.0
 
     # lookup word in y1
     wv1 = mod_y1[w1]
 
     # print distance between two words
-    wv_sim = cos_sim(wv1, mod_y2_aligned.get_vector(w2))
+    wv_sim = cos_sim(wv1, mod_y2_aligned.get_vector(w2)) if mod_y2_aligned.__contains__(w2) else 0.0
     #print(w1, w2, ":", wv_sim)
 
     # find nearest neighbor in y2
@@ -115,7 +118,7 @@ def eval_analogy(mod_y1, mod_y2_aligned, w1, y1, w2, y2, top_knn=1):
 
     w2_preds = [wrd for wrd, _ in preds]
 
-    print(w1, "vs.", w2_preds)
+    #print(w1, "vs.", w2_preds)
     
     return w2 in w2_preds, wv_sim
 
@@ -126,10 +129,11 @@ def eval_static(model, w1, w2, top_knn=10):
     # top_knn chooses how many nearest neighbors to test against. 
     # Original model only tested closest neighbor but given noisiness of word vectors this seems misguided.
 
-    # lookup word in y1
+    # make sure words are in the model
     if not model.__contains__(w1) or not model.__contains__(w2):
         return False, 1.0
     
+    # lookup word in y1
     wv1 = model.get_vector(w1)
 
     # print distance between two words
@@ -184,7 +188,7 @@ def load_models(models_path, static_path, model_years):
 
 
 #### TEST ANALOGIES ###
-def eval_yao_analogies(analogies, models_path, static_path, model_years, top_knn=1, isStatic=False):
+def eval_yao_analogies(analogies, models, static_model, model_years, top_knn=1, isStatic=False):
     acc_emb = 0.0
     acc_stat = 0.0
     acc_base = 0.0
@@ -192,8 +196,6 @@ def eval_yao_analogies(analogies, models_path, static_path, model_years, top_knn
     wv_sim_avg = 0.0
     wv_sim_st_avg = 0.0
     total_an = 0
-
-    models, static_model = load_models(models_path, static_path, model_years)
 
     # shuffle analogies
     random.shuffle(analogies)
@@ -203,6 +205,13 @@ def eval_yao_analogies(analogies, models_path, static_path, model_years, top_knn
         w1, y1 = an1.split('-')
         w2, y2 = an2.split('-')
 
+        # swap analogy so y1 < y2
+        if y2 < y1:
+            w3, y3 = w1, y1
+            w1, y1 = w2, y2
+            w2, y2 = w3, y3
+            
+
         y1, y2 = int(y1), int(y2)
 
         if y1 in model_years and y2 in model_years:
@@ -210,7 +219,7 @@ def eval_yao_analogies(analogies, models_path, static_path, model_years, top_knn
             total_an += 1
 
             # aligned test
-            eval, wv_sim = eval_analogy(models[y1], models[(y1, y2)], w1, y1, w2, y2, top_knn=top_knn)
+            eval, wv_sim = eval_analogy(models[y1], models[(y1, y2)], w1, w2, top_knn=top_knn)
 
             wv_sim_avg += wv_sim
             
@@ -258,14 +267,16 @@ def eval_szymanski_analogies(analogies_dict, models, static_model, model_years, 
 
             for y2 in range(y1 + 1, len(years)):
 
-                if years[y1] in model_years and years[y2] in model_years:
+                year1, year2 = years[y1], years[y2]
+
+                if year1 in model_years and year2 in model_years:
 
                     w1 = analogies_dict[category][y1]
                     w2 = analogies_dict[category][y2]
                     cat_total += 1
 
                     # aligned embedding test
-                    eval, wv_sim = eval_analogy(models[y1], models[(y1, y2)], w1, years[y1], w2, years[y2], top_knn=top_knn)
+                    eval, wv_sim = eval_analogy(models[year1], models[(year1, year2)], w1, w2, top_knn=top_knn)
 
                     wv_sim_avg += wv_sim
 
