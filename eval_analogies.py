@@ -99,26 +99,52 @@ def intersection_align_gensim(m1, m2, words=None):
 
 
 #### ANALOGY EVAL ####
-def eval_analogy(mod_y1, mod_y2_aligned, w1, w2, top_knn=1):
+def eval_analogy(mod_y1, mod_y2_aligned, w1, w2, top_knn=1, freq_thresh=0.0, szymanski=False):
     # top_knn chooses how many nearest neighbors to test against. 
+    # freq_thresh sets a threshold for when not to consider low frequency words: 
+    #   if top_pct=0.1, then words at or below the 10th frequency percentile in 
+    #   the corpus won't be considered for the analogy.
+    # szymanski: if True, find most similar vectors to w1 in mod_y2_aligned rather 
+    #   than mod_y1. ...Pretty sure syzmanski was just coding it wrong.
 
     # make sure words are in the model
     if not mod_y1.__contains__(w1) or not mod_y2_aligned.__contains__(w1):
         return False, 1.0
 
+    # 
+
     # lookup word in y1
-    wv1 = mod_y1[w1]
+    wv1 = mod_y1[w1] if not szymanski else mod_y2_aligned[w1] 
 
     # print distance between two words
     wv_sim = cos_sim(wv1, mod_y2_aligned.get_vector(w2)) if mod_y2_aligned.__contains__(w2) else 0.0
     #print(w1, w2, ":", wv_sim)
+
+    # if freq_thresh != 0.0: 
+    #   slice mod_y2_aligned so that it doesn't have bottom x%
 
     # find nearest neighbor in y2
     preds = mod_y2_aligned.most_similar(wv1, topn=top_knn)
 
     w2_preds = [wrd for wrd, _ in preds]
 
+
     #print(w1, "vs.", w2_preds)
+
+    # print frequency of w1, w2, preds
+    y2_vocab_len = len(mod_y2_aligned)
+    w2_idx = mod_y2_aligned.key_to_index[w2]
+
+    y1_vocab_len = len(mod_y1)
+    w1_idx = mod_y1.key_to_index[w1]
+
+    print("w1:", w1_idx, "/", y1_vocab_len)
+    print("w2:", w2_idx, "/", y2_vocab_len, "& count:", mod_y2_aligned.expandos['count'][w2])
+
+    preds_idx_ct = [(mod_y2_aligned.key_to_index[pred], mod_y2_aligned.expandos['count'][pred]) for pred in w2_preds]
+
+    for idx, count in preds_idx_ct:
+        print("pred:", idx, "/", y2_vocab_len, "& count:", count)
     
     return w2 in w2_preds, wv_sim
 

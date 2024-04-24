@@ -228,8 +228,8 @@ print(datetime.datetime.now().strftime('%x').replace('/', ''))
 print("training whole thing...")
 sentences = NytimesParagraphs("", paths=["../NYT_archive/paragraphs-" + str(year) + ".json" for year in YEARS])
 
-model = gensim.models.Word2Vec(vector_size=VECTOR_SIZE, window=5, sg=USE_SKIP_GRAM, epochs=EPOCHS, sample=0.00001,
-                                alpha=INIT_LR, min_alpha=0.07, sentences=sentences, min_count=10, compute_loss=True,
+model = gensim.models.Word2Vec(vector_size=VECTOR_SIZE, window=5, sg=USE_SKIP_GRAM, epochs=EPOCHS, sample=0.0001,
+                                alpha=INIT_LR, min_alpha=0.07, sentences=sentences, min_count=200, compute_loss=True,
                             callbacks=[callback(EPOCHS, INIT_LR)])
 
 date = datetime.datetime.now().strftime('%x').replace('/', '')
@@ -253,7 +253,7 @@ for sl_pct in [1.0]: #float(10**x) * 1.0 for x in range(0)]:
         print("training", year, "...", end="", flush=True)
 
         model = gensim.models.Word2Vec(vector_size=VECTOR_SIZE, window=5, sg=USE_SKIP_GRAM, epochs=EPOCHS, sample=0.00001,
-                                       alpha=INIT_LR, min_alpha=0.1, sentences=sentences, min_count=10, compute_loss=True,
+                                       alpha=INIT_LR, min_alpha=0.1, sentences=sentences, min_count=20, compute_loss=True,
                                     callbacks=[callback(EPOCHS, INIT_LR)])
 
         models[year] = model
