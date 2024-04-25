@@ -156,22 +156,48 @@ def eval_static(model, w1, w2, top_knn=10):
     # Original model only tested closest neighbor but given noisiness of word vectors this seems misguided.
 
     # make sure words are in the model
-    if not model.__contains__(w1) or not model.__contains__(w2):
+    if not model.__contains__(w1) or not model.__contains__(w2) or model.key_to_index[w1] >= len(model.vectors) or model.key_to_index[w2] >= len(model.vectors):
         return False, 1.0
-    
+
     # lookup word in y1
     wv1 = model.get_vector(w1)
 
+    # print(w1, w2, model.key_to_index[w2], len(model.vectors))
+
     # print distance between two words
     wv_sim = cos_sim(wv1, model.get_vector(w2))
-    #print(w1, w2, ":", wv_sim)
+    # print(w1, w2, ":", wv_sim)
 
     # find nearest neighbor in y2
-    preds = model.most_similar(wv1, topn=top_knn)
+    preds = []
+    i = 1
+    while len(preds) < top_knn and i < 100:
+
+        pred = model.most_similar(wv1, topn=i)
+
+        if model.key_to_index[pred[-1][0]] / len(model) < 0.2:
+            preds.append(pred[-1])
+
+        i += 1
+
 
     w2_preds = [wrd for wrd, _ in preds]
 
     #print("top-1:", w2_preds[0], ":", cos_sim(wv1, model.get_vector(w2_preds[0])))
+
+    # print frequency of w1, w2, preds
+    # vocab_len = len(model)
+    # w2_idx = model.key_to_index[w2]
+
+    # w1_idx = model.key_to_index[w1]
+
+    # print("w1:", w1, round(w1_idx / vocab_len, 3), "%")
+    # print("w2:", w2, round(w2_idx / vocab_len, 3), "% & count:", model.expandos['count'][w2_idx])
+
+    # preds_idx = [(pred, model.key_to_index[pred]) for pred in w2_preds]
+
+    # for pred, idx in preds_idx:
+    #     print("pred:", pred, round(idx / vocab_len, 3), "% & count:", model.expandos['count'][idx])
 
     #print(w1, w2, "vs.", w2_preds)
     
@@ -199,34 +225,40 @@ def load_models(models_path, static_path, model_years):
     
     static_model = KeyedVectors.load_word2vec_format(static_path, binary=False)
 
-    for yr2 in model_years:
-        print(yr2, end="...", flush=True)
-        models[yr2] = KeyedVectors.load_word2vec_format(models_path + 'sgns_vectors_unaligned_' + str(yr2) + '_041724.txt', binary=False)
+    # for yr2 in model_years:
+    #     print(yr2, end="...", flush=True)
+    #     models[yr2] = KeyedVectors.load_word2vec_format(models_path + 'sgns_vectors_unaligned_' + str(yr2) + '_041724.txt', binary=False)
 
-        # align mod_y2 with y1
-        for yr1 in range(model_years[0],yr2):
+    #     # align mod_y2 with y1
+    #     for yr1 in range(model_years[0],yr2):
 
-            mod_y1 = models[yr1]
+    #         mod_y1 = models[yr1]
 
-            models[(yr1, yr2)] = smart_procrustes_align_gensim(mod_y1, models[yr2])
+    #         models[(yr1, yr2)] = smart_procrustes_align_gensim(mod_y1, models[yr2])
 
     return models, static_model
 
 
 #### TEST ANALOGIES ###
-def eval_yao_analogies(analogies, models, static_model, model_years, top_knn=1, isStatic=False):
+def eval_yao_analogies(analogies, gpt_results, models, static_model, model_years, top_knn=1, freq_thresh=0.0):
     acc_emb = 0.0
     acc_stat = 0.0
+    acc_gpt = 0.0
     acc_base = 0.0
 
     wv_sim_avg = 0.0
     wv_sim_st_avg = 0.0
     total_an = 0
 
-    # shuffle analogies
-    random.shuffle(analogies)
+    # slice static model so that it doesn't have bottom freq_thresh %
+    if freq_thresh > 0.0 and static_model != None: 
+        print("slicing", int(len(static_model) * (1 - freq_thresh)))
+        static_model.vectors = static_model.vectors[:int(len(static_model) * (1 - freq_thresh)),:]
 
-    for an1, an2 in analogies:
+    # shuffle analogies
+    # random.shuffle(analogies)
+
+    for i, (an1, an2) in enumerate(analogies):
 
         w1, y1 = an1.split('-')
         w2, y2 = an2.split('-')
@@ -245,22 +277,40 @@ def eval_yao_analogies(analogies, models, static_model, model_years, top_knn=1, 
             total_an += 1
 
             # aligned test
-            eval, wv_sim = eval_analogy(models[y1], models[(y1, y2)], w1, w2, top_knn=top_knn)
+            if y1 in models and (y1, y2) in models:
+                eval, wv_sim = eval_analogy(models[y1], models[(y1, y2)], w1, w2, top_knn=top_knn, freq_thresh=freq_thresh)
 
-            wv_sim_avg += wv_sim
+                wv_sim_avg += wv_sim
             
-            if eval:
-                acc_emb += 1
-                #print("correct on", w1, w2, y1)
+                if eval:
+                    acc_emb += 1
+                    #print("correct on", w1, w2, y1)
 
             # static embedding test
             if static_model != None:
-                eval_st, wv_sim_st = eval_static(static_model, w1, w2, top_knn)
+
+                eval_st, wv_sim_st = eval_static(static_model, w1, w2, top_knn=top_knn)
 
                 wv_sim_st_avg += wv_sim_st
 
                 if eval_st:
                     acc_stat += 1
+
+            # gpt-4 results 
+            if gpt_results != []:
+                
+                # print(w1, w2, y1, y2)
+                # print("gpt:", gpt_results[i])
+
+                w1_gpt, _, w2_gpt, _, gpt_res = list(map(lambda x: x.strip(), gpt_results[i]))
+                
+                if w1 != w1_gpt or w2 != w2_gpt:
+                    print("GPT ERROR ON", w1, w2, w1_gpt, w2_gpt)
+
+                # TODO: fix switch around on yao analogies
+                if w1 in list(map(lambda r: r.lower().strip(), gpt_res.split(';'))):
+                    #print("GPT correct on", w1, w2, y1, y2)
+                    acc_gpt += 1
 
             # baseline test
             if eval_baseline(w1, w2):
@@ -268,6 +318,8 @@ def eval_yao_analogies(analogies, models, static_model, model_years, top_knn=1, 
 
     acc_base /= total_an
     acc_emb /= total_an
+    acc_stat /= total_an
+    acc_gpt /= total_an
     wv_sim_avg /= total_an
     print("avg aligned sim:", wv_sim_avg / total_an)
     print("avg static sim:", wv_sim_st_avg / total_an)
@@ -275,8 +327,9 @@ def eval_yao_analogies(analogies, models, static_model, model_years, top_knn=1, 
     print("aligned:", acc_emb)
     print("static:", acc_stat)
     print("baseline:", acc_base)
+    print("gpt-4:", acc_gpt)
 
-def eval_szymanski_analogies(analogies_dict, models, static_model, model_years, top_knn=1, isStatic=False):
+def eval_szymanski_analogies(analogies_dict, models, static_model, model_years, top_knn=1, freq_thresh=0.0):
 
     years = analogies_dict["Year"]
 
@@ -284,6 +337,12 @@ def eval_szymanski_analogies(analogies_dict, models, static_model, model_years, 
 
     wv_sim_avg = 0.0
     wv_sim_st_avg = 0.0
+
+
+    # slice static model so that it doesn't have bottom freq_thresh %
+    if freq_thresh > 0.0 and static_model != None: 
+        print("slicing", int(len(static_model) * (1 - freq_thresh)))
+        static_model.vectors = static_model.vectors[:int(len(static_model) * (1 - freq_thresh)),:]
 
     for category in analogies_dict.keys()[1:]:
 
@@ -302,16 +361,18 @@ def eval_szymanski_analogies(analogies_dict, models, static_model, model_years, 
                     cat_total += 1
 
                     # aligned embedding test
-                    eval, wv_sim = eval_analogy(models[year1], models[(year1, year2)], w1, w2, top_knn=top_knn)
+                    if year1 in models and (year1, year2) in models:
+                        eval, wv_sim = eval_analogy(models[year1], models[(year1, year2)], w1, w2, top_knn=top_knn, freq_thresh=freq_thresh)
 
-                    wv_sim_avg += wv_sim
+                        wv_sim_avg += wv_sim
 
-                    if eval:
-                        category_res[0] += 1
+                        if eval:
+                            category_res[0] += 1
 
                     # static embedding test
                     if static_model != None:
-                        eval_st, wv_sim_st = eval_static(static_model, w1, w2, top_knn)
+
+                        eval_st, wv_sim_st = eval_static(static_model, w1, w2, top_knn=top_knn)
 
                         wv_sim_st_avg += wv_sim_st
 
@@ -343,29 +404,36 @@ def eval_szymanski_analogies(analogies_dict, models, static_model, model_years, 
     return res_dict
 
 MODELS_PATH = './embeddings/nytimes-big/'
-STATIC_MPATH = './embeddings/nytimes-big/sgns_vectors_unaligned_all_years_041724.txt'
+STATIC_MPATH = './embeddings/nytimes-big/sgns_vectors_unaligned_all_years_042424.txt'
 YAO_TS1_PATH = './testset_1.csv'
 YAO_TS2_PATH = './testset_2.csv'
 SYZ_ANALOGIES_PATH = './szymanski_analogies.csv'
 
+GPT_YAO_1_PATH = 'gpt_responses_yao_analogies_1.csv'
+GPT_YAO_2_PATH = 'gpt_responses_yao_analogies_2.csv'
+
 MODEL_YEARS = range(1990, 2017)
 
 TOP_KNN = 10
+FREQ_THRESH = 0.0
 
 ts1_analogies = load_analogies(YAO_TS1_PATH)
 ts2_analogies = load_analogies(YAO_TS2_PATH)
 
 an_dict = pd.read_csv(SYZ_ANALOGIES_PATH)
 
+gpt_results_1 = load_analogies(GPT_YAO_1_PATH)
+gpt_results_2 = load_analogies(GPT_YAO_2_PATH)
+
 print("loading models......", end="", flush=True)
 models, static_model = load_models(MODELS_PATH, STATIC_MPATH, MODEL_YEARS)
 print("done loading models!")
 
 print(".......szymanski test...........")
-eval_szymanski_analogies(an_dict, models, static_model, MODEL_YEARS, TOP_KNN)
+#eval_szymanski_analogies(an_dict, models, static_model, MODEL_YEARS, TOP_KNN, FREQ_THRESH)
 
 print(".......yao testset 1............")
-eval_yao_analogies(ts1_analogies, models, static_model, MODEL_YEARS, TOP_KNN)
+eval_yao_analogies(ts1_analogies, gpt_results_1, models, static_model, MODEL_YEARS, TOP_KNN, FREQ_THRESH)
 
 print(".......yao testset 2............")
-eval_yao_analogies(ts2_analogies, models, static_model, MODEL_YEARS, TOP_KNN)
+#eval_yao_analogies(ts2_analogies, gpt_results_2, models, static_model, MODEL_YEARS, TOP_KNN, FREQ_THRESH)
