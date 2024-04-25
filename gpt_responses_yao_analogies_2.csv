@@ -1,0 +1,445 @@
+twitter,2012,bulletin,1990,chat; gossip; babble; chitchat; blather; prattle; natter; schmooze;
+twitter,2012,bulletin,1991,chat; message; instant messaging; text; email; communication; online; social media; interact; network
+twitter,2012,bulletin,1992,microblog; update; post; message; share; status; chat; broadcast; newsfeed; communicate
+twitter,2012,bulletin,1993,socialize; chat; talk; gossip; converse; interact; communicate; schmooze; babble; mingle
+twitter,2012,bulletin,1994,chat; message; communicate; socialize; talk; converse; interact; discuss; meet; connect
+twitter,2012,newspaper,1990,bulletin board; email; fax; phone call; letter; telegram; newsgroup; radio; television; newsletter
+twitter,2012,newspaper,1991,tweet; chirp; peep; twittering; twit; chirrup; burble; cheep; tweetup
+twitter,2012,newspaper,1992,chat; message; gossip; babble; chatter; talk; whisper; discuss; communicate; share
+twitter,2012,newspaper,1993,internet; email; chat; bulletin board; online forum; IRC; Usenet; newsgroup; web; modem
+twitter,2012,newspaper,1994,internet; chat; email; online; web; communication; message; connect; forum; network
+twitter,2012,tabloid,1990,chat; message; gossip; network; connect; share; interact; bulletin; socialize; communicate
+twitter,2012,tabloid,1991,tweet; chirp; birdcall; cheep; chirrup; warble; trill; tweetie; peep
+twitter,2012,tabloid,1992,chat; message; chirp; converse; babble; gossip; tweet; communicate; interactive; network
+twitter,2012,tabloid,1993,chat; chatter; babble; gossip; converse; blab; prattle; natter; gab; talk
+twitter,2012,tabloid,1994,chat; message; online; network; connect; forum; communicate; social; interact; email
+twitter,2012,gossip,1990,birdsong; chirping; warbling; tweeting; chatter; babble; twittering; murmur; chirrup;
+twitter,2012,gossip,1991,chatter; babble; chatterbox; prattle; gossip; blather; natter; yap; jabber;
+twitter,2012,gossip,1992,chat; message; bulletin; post; update; electronic mail; communicate; text; forum; share
+twitter,2012,gossip,1993,email; chat; message; communicate; online; internet; web; connect; socialize; forum
+twitter,2012,gossip,1994,chat; IRC; messaging; online; email; forum; BBS; newsgroup; communication; internet
+pixar,2008,disney,1990,Disney; Warner Bros; Paramount; MGM; Universal; DreamWorks; Fox; Columbia; Lucasfilm; Miramax
+pixar,2008,disney,1991,Disney; DreamWorks; Pixar; animation; Warner Bros; MGM; Fox; Universal; Paramount; Nickelodeon
+pixar,2008,disney,1992,Disney; Amblin; Lucasfilm; DreamWorks; Warner Bros; MGM; Paramount; Universal; Columbia; Fox
+pixar,2008,disney,1993,Disney; Warner Bros; DreamWorks; MGM; Universal; Paramount; Fox; Columbia; Lucasfilm; Miramax
+pixar,2008,disney,1994,Disney; Animation; DreamWorks; Warner Bros; Nickelodeon; MGM; Paramount; Fox; Columbia; Universal
+pixar,2008,warner,1990,Disney; animation; DreamWorks; Warner Bros; MGM; Paramount; Fox; Universal; Columbia; Nickelodeon
+pixar,2008,warner,1991,Disney; animation; DreamWorks; Warner Bros; Nickelodeon; MGM; Fox; Paramount; Sony; Universal
+pixar,2008,warner,1992,Disney; DreamWorks; animation; film; studio; Hollywood; movies; entertainment; CGI; filmmaker
+pixar,2008,warner,1993,Disney; animation; DreamWorks; film; studio; movies; Hollywood; entertainment; CGI; Warner Bros.
+pixar,2008,warner,1994,Disney; DreamWorks; Warner Bros; MGM; Paramount; Sony Pictures; Fox Animation; Universal Studios; Nickelodeon Movies
+pixar,2008,mgm,1990,Disney; DreamWorks; Warner Bros; MGM; Paramount; Universal; Fox; Columbia; Miramax; Lucasfilm
+pixar,2008,mgm,1991,Disney; animation; DreamWorks; Warner Bros; Nickelodeon; Fox; MGM; Paramount; Lucasfilm; Columbia
+pixar,2008,mgm,1992,Disney; animation; DreamWorks; Warner Bros; film; studio; movies; cinematic; entertainment; Hollywood
+pixar,2008,mgm,1993,Disney; Warner Bros; DreamWorks; MGM; Paramount; Fox; Universal; Columbia; Miramax; Lionsgate
+pixar,2008,mgm,1994,Disney; DreamWorks; MGM; Warner Bros; Paramount; Universal; Columbia; Nickelodeon; Lucasfilm; Sony Pictures
+dreamworks,2005,disney,1990,Disney; Pixar; Warner Bros; Paramount; Universal; MGM; Columbia; Lucasfilm; Amblin; Fox
+dreamworks,2005,disney,1991,Disney; Pixar; Warner Bros; Universal Pictures; Paramount Pictures; Columbia Pictures; Metro-Goldwyn-Mayer; 20
+dreamworks,2005,disney,1992,Pixar; Disney; Warner Bros; Paramount; Universal Studios; MGM; Fox Animation; Columbia Pictures; Nickelodeon Movies
+dreamworks,2005,disney,1993,Pixar; Disney; Paramount; Warner Bros; Sony Pictures; Universal Studios; MGM; Fox Animation Studios; Nickelodeon
+dreamworks,2005,disney,1994,Pixar; Disney; Warner Bros; Paramount; MGM; Universal Studios; Fox Animation Studios; Columbia Pictures; Nickelodeon
+dreamworks,2005,warner,1990,Pixar; Disney; MGM; Paramount; Warner Bros; Universal; Fox; Columbia; Miramax; Lionsgate
+dreamworks,2005,warner,1991,Disney; Pixar; Warner Bros; Fox Animation; Amblin Entertainment; MGM Studios; Paramount Pictures; Lionsgate Films;
+dreamworks,2005,warner,1992,Pixar; Disney; Warner Bros; MGM; Universal Studios; Paramount Pictures; 20th Century Fox; Columbia Pictures;
+dreamworks,2005,warner,1993,Pixar; Disney; Warner Bros; Paramount; Fox; Sony; MGM; Universal; Columbia; New Line
+dreamworks,2005,warner,1994,Disney; Pixar; Warner Bros; MGM; Paramount; Fox; Universal; Columbia; Sony Pictures; Miramax
+dreamworks,2005,mgm,1990,Disney; Pixar; Warner Bros; MGM; Paramount; Amblin; Universal Studios; Sony Pictures; Fox Animation; Lucas
+dreamworks,2005,mgm,1991,Pixar; Disney; Warner Bros; Paramount; Fox; Sony Pictures; MGM; Universal Studios; Columbia Pictures; Lionsgate
+dreamworks,2005,mgm,1992,Disney; Pixar; Warner Bros; Paramount; Fox; Universal; MGM; Columbia; Sony Pictures; Lionsgate
+dreamworks,2005,mgm,1993,Disney; Pixar; Warner Bros; 20th Century Fox; Paramount Pictures; Columbia Pictures; Universal Studios; MGM; Lions
+dreamworks,2005,mgm,1994,Disney; Pixar; Warner Bros; Fox Animation; Paramount Pictures; Sony Pictures Animation; MGM; Universal Pictures; Nickelodeon
+nokia,2012,motorola,1990,Motorola; Ericsson; Siemens; Alcatel; Panasonic; Sony; Philips; Samsung; Toshiba; NEC
+nokia,2012,motorola,1991,Motorola; Ericsson; BlackBerry; Siemens; Panasonic; Alcatel; Philips; Samsung; Sony; LG
+nokia,2012,motorola,1992,Motorola; Ericsson; Siemens; Panasonic; Samsung; Alcatel; Sony; Philips; Sharp; NEC
+nokia,2012,motorola,1993,Motorola; Ericsson; Siemens; Samsung; Panasonic; Sony; Philips; Sharp; Alcatel; NEC
+nokia,2012,motorola,1994,Motorola; Ericsson; Siemens; Panasonic; Philips; Samsung; Alcatel; Sony; Sanyo; LG
+amazoncom,2000,walmart,1990,bookstore; bookseller; Borders; Barnes & Noble; Waterstones; books; retail; shopping; catalog; commerce
+amazoncom,2000,walmart,1991,bookstore; bookseller; retail; catalog; commerce; shop; merchant; Wal-Mart; Sears; distribution
+amazoncom,2000,walmart,1992,Sears; Walmart; Borders; Barnes & Noble; Macy's; Best Buy; JC Penney; Circuit City; Comp
+amazoncom,2000,walmart,1993,bookstore; bookseller; books; retail; shopping; commerce; online store; catalog; distributor; market
+amazoncom,2000,walmart,1994,bookstore; bookseller; retail; shop; commerce; catalog; sales; merchant; outlet; distributor
+amazoncom,2000,macy,1990,Sears; Walmart; Barnes & Noble; Macy's; J.C. Penney; Borders; Kmart; Target;
+amazoncom,2000,macy,1991,bookstore; bookseller; retail; commerce; catalog; shopping; mail-order; merchant; outlet; shop
+amazoncom,2000,macy,1992,bookseller; online bookstore; online retailer; e-commerce; web store; mail-order catalog; Barnes & Noble; Borders;
+amazoncom,2000,macy,1993,bookstore; bookseller; retail; commerce; online shopping; catalog; mall; e-commerce; shop; vendor
+amazoncom,2000,macy,1994,bookstore; bookseller; online retail; e-commerce; Barnes & Noble; Borders; shopping; Internet sales; retail;
+wikileaks,2010,newspaper,1990,Watergate; Pentagon Papers; whistleblowing; espionage; classified documents; secrecy; scandal; investigative journalism; leaks; privacy breaches
+wikileaks,2010,newspaper,1991,Pentagon Papers; Watergate; whistleblowers; classified documents; espionage; leak; Daniel Ellsberg; government secrecy
+wikileaks,2010,newspaper,1992,Watergate; Pentagon Papers; espionage; whistle-blowing; classified documents; government secrets; intelligence leaks; leaking; whistleblower
+wikileaks,2010,newspaper,1993,Pentagon Papers; Watergate; espionage; whistleblower; classified documents; intelligence leaks; investigative journalism; transparency in government;
+wikileaks,2010,newspaper,1994,Pentagon Papers; Watergate; whistleblower; classified documents; espionage; leaking; secret files; intelligence; political scandal;
+wikileaks,2010,press,1990,Pentagon Papers; Watergate; whistleblowing; classified information; Deep Throat; investigative journalism; Daniel Ellsberg
+wikileaks,2010,press,1991,Pentagon Papers; Watergate; whistleblower; classified documents; espionage; leak; scandal; investigative journalism; government secrecy;
+wikileaks,2010,press,1992,Watergate; Pentagon Papers; whistleblowing; classified information; espionage; leak; investigative journalism; scandal; secrecy; transparency
+wikileaks,2010,press,1993,Watergate; Iran-Contra; Pentagon Papers; whistleblowing; espionage; Daniel Ellsberg; classified documents; government leaks
+wikileaks,2010,press,1994,Watergate; Pentagon Papers; whistleblowing; espionage; leak; scandal; confidential; informant; secrecy; disclosure
+wikileaks,2010,reports,1990,Pentagon Papers; Watergate; whistleblower; espionage; leak; classified documents; intelligence; scandal; transparency; freedom of
+wikileaks,2010,reports,1991,Pentagon Papers; Watergate; classified documents; whistleblower; espionage; secrecy; Daniel Ellsberg; government transparency;
+wikileaks,2010,reports,1992,Watergate; Pentagon Papers; whistleblowing; espionage; leaks; scandal; Daniel Ellsberg; investigative journalism; transparency;
+wikileaks,2010,reports,1993,Pentagon Papers; Watergate; whistleblowing; classified documents; espionage; government secrets; political leaks; state security;
+wikileaks,2010,reports,1994,Pentagon Papers; Watergate; classified information; whistleblowers; espionage; government transparency; investigative journalism; confidential documents;
+obamacare,2013,medicare,1990,Medicare; Medicaid; healthcare; reform; insurance; managed care; HMO; national health; COBRA; HIP
+obamacare,2013,medicare,1991,healthcare reform; Clinton plan; managed care; health security; universal coverage; health reform; payer systems; Medicaid expansion;
+obamacare,2013,medicare,1992,Hillarycare; healthcare reform; managed care; health security; universal coverage; Medicaid expansion; healthcare policy; Health Security Act;
+obamacare,2013,medicare,1993,Hillarycare; managed care; health reform; universal coverage; healthcare system; public option; healthcare policy; Medicare expansion; Medicaid
+obamacare,2013,medicare,1994,Hillarycare; health reform; Managed Care; Health Security Act; universal coverage; healthcare system; Medicare reform; Medicaid expansion;
+msnbc,2008,abc,1990,CNN; Fox News; NBC; CBS; ABC; BBC; Reuters; Associated Press; Newsweek; Time
+msnbc,2008,abc,1991,CNN; Fox News; ABC News; NBC; CBS News; PBS; Newsweek; Time Magazine; Associated Press; Reuters
+msnbc,2008,abc,1992,CNN; NBC; CBS; ABC; Fox News; news channel; broadcast; media; news network; television station
+msnbc,2008,abc,1993,CNN; Fox News; CBS News; ABC News; NBC News; ESPN; MTV; Bloomberg; CNBC; PBS
+msnbc,2008,abc,1994,CNN; NBC; ABC; CBS; Fox News; PBS; news media; broadcast; television news; news channel
+msnbc,2008,cbs,1990,CNN; BBC; ABC; CBS; NBC; Fox News; PBS; SKY News; Reuters; Associated Press
+msnbc,2008,cbs,1991,CNN; BBC; ABC; CBS; NBC; Fox News; news channel; broadcast network; news station; television news
+msnbc,2008,cbs,1992,CNN; Fox News; NBC; ABC; CBS; BBC; Reuters; AP; Newsweek; Time
+msnbc,2008,cbs,1993,CNN; Fox News; ABC News; CBS News; NBC News; ESPN; MTV; BBC; PBS; TNT
+msnbc,2008,cbs,1994,CNN; Fox News; NBC; ABC; CBS; BBC; CNBC; PBS; Reuters; AP
+msnbc,2008,fox,1990,CNN; BBC; NBC; CBS; ABC; Fox News; Reuters; AP; Newsweek; Time Magazine
+msnbc,2008,fox,1991,CNN; Fox News; NBC; ABC; CBS; BBC; news channel; television news; cable news; broadcast news
+msnbc,2008,fox,1992,CNN; Fox News; BBC; ABC; CBS; NBC; PBS; Reuters; Newsweek; Time
+msnbc,2008,fox,1993,CNN; NBC; ABC; CBS; Fox News; BBC; news channel; cable news; broadcast; media outlet
+msnbc,2008,fox,1994,CNN; Fox News; ABC News; CBS News; NBC News; PBS; BBC; C-SPAN; CNBC; Reuters
+netflix,2014,hbo,1990,Blockbuster; Hollywood Video; Video Rental; Movie Rental; VHS Rental; Cable TV; Home Entertainment; Pay-Per
+netflix,2014,hbo,1991,Blockbuster; Hollywood Video; Video rental; Movie rental; Home video; VHS rentals; Cinema; Film rental; Entertainment
+netflix,2014,hbo,1992,Blockbuster; Hollywood Video; Video Rental; Movie Rental; VHS Rentals; Pay-per-view; Cable TV; Video Store
+netflix,2014,hbo,1993,Blockbuster; Hollywood Video; video rental; movie rental; VHS rental; cable TV; pay-per-view; video store
+netflix,2014,hbo,1994,Blockbuster; Hollywood Video; Video rental; Movie rental; Pay-per-view; Cable TV; VHS rentals; Rental store
+netflix,2014,abc,1990,Blockbuster; Hollywood Video; Video Rental; Movie Rental; VHS Rentals; Cable Television; Pay-per-view; Video Store
+netflix,2014,abc,1991,Blockbuster; Hollywood Video; Video rental; Movie rental; Rent movies; VHS rental; Video store; Tape rental;
+netflix,2014,abc,1992,Blockbuster; Hollywood Video; TCI; Video rental; Pay-per-view; Cable TV; HBO; Showtime; Cinema
+netflix,2014,abc,1993,Blockbuster; Hollywood Video; Video rental; Movie rental; VHS rentals; Home video; Cinema; Film rental; Entertainment
+netflix,2014,abc,1994,Blockbuster; Hollywood Video; Movie Gallery; Video Rental; VHS rental; DVD rental; Pay-per-view; Rental store
+ebay,2000,auction,1990,auction; marketplace; classifieds; trading; bargaining; selling; commerce; retail; consumerism; shop
+ebay,2000,auction,1991,Amazon; Craigslist; eShop; Marketplace; Online auction; E-commerce; Flea market; Bazaar; Webstore;
+ebay,2000,auction,1992,Amazon; Alibaba; Etsy; Rakuten; Taobao; Flipkart; Craigslist; Walmart; Target; Best Buy
+ebay,2000,auction,1993,Amazon; Craigslist; Yahoo; AOL; AltaVista; Lycos; Excite; WebCrawler; Infoseek
+ebay,2000,auction,1994,Amazon; Craigslist; Yahoo! Auctions; Overstock; uBid; Excite; Lycos; AltaVista
+verizon,2004,att,1990,AT&T; BellSouth; Sprint; MCI; T-Mobile; Nextel; SBC Communications; Ameritech; US
+verizon,2004,att,1991,AT&T; Bell Atlantic; MCI; BellSouth; Pacific Telesis; Ameritech; Southwestern Bell; NY
+verizon,2004,att,1992,AT&T; BellSouth; Sprint; MCI; T-Mobile; Nextel; Alltel; Cellular One; Qwest
+verizon,2004,att,1993,AT&T; Sprint; MCI; BellSouth; Pacific Telesis; Ameritech; GTE; Bell Atlantic;
+verizon,2004,att,1994,AT&T; MCI; Sprint; BellSouth; Southwestern Bell; Pacific Telesis; Ameritech; Bell Atlantic
+verizon,2004,mci,1990,AT&T; MCI; Sprint; BellSouth; Pacific Telesis; Ameritech; Bell Atlantic; Southwestern Bell
+verizon,2004,mci,1991,AT&T; Bell Atlantic; MCI; Sprint; NYNEX; Ameritech; BellSouth; Pacific Telesis
+verizon,2004,mci,1992,AT&T; BellSouth; Sprint; MCI; Ameritech; Pacific Telesis; Bell Atlantic; Southwestern Bell
+verizon,2004,mci,1993,AT&T; Sprint; MCI; BellSouth; Ameritech; US West; Pacific Telesis; Bell Atlantic;
+verizon,2004,mci,1994,AT&T; MCI; BellSouth; Sprint; SBC Communications; T-Mobile; Nextel; Bell Atlantic; Amer
+jpmorgan,2012,merrill,1990,Citibank; Wells Fargo; Merrill Lynch; Goldman Sachs; Lehman Brothers; Bank of America; Morgan Stanley; Pr
+jpmorgan,2012,merrill,1991,Goldman Sachs; Merrill Lynch; Citibank; Lehman Brothers; Bear Stearns; Morgan Stanley; Wells Fargo
+jpmorgan,2012,merrill,1992,Citibank; Chase Manhattan; Bank of America; Wells Fargo; Merrill Lynch; Goldman Sachs; Lehman Brothers; Bear
+jpmorgan,2012,merrill,1993,Citibank; BankAmerica; WellsFargo; ChaseManhattan; MerrillLynch; GoldmanSachs; Lehman
+jpmorgan,2012,merrill,1994,Chase Manhattan; Citibank; Bankers Trust; Wells Fargo; Merrill Lynch; Goldman Sachs; Lehman Brothers;
+jpmorgan,2012,salomon,1990,Citibank; Bank of America; Wells Fargo; Merrill Lynch; Goldman Sachs; Morgan Stanley; Lehman Brothers; Bear
+jpmorgan,2012,salomon,1991,Citibank; Chase; Bank of America; Wells Fargo; Goldman Sachs; Morgan Stanley; Merrill Lynch; Lehman Brothers
+jpmorgan,2012,salomon,1992,Citibank; BankAmerica; Wells Fargo; Chase Manhattan; Merrill Lynch; Goldman Sachs; Morgan Stanley; Lehman Brothers
+jpmorgan,2012,salomon,1993,Citibank; Merrill Lynch; Goldman Sachs; Morgan Stanley; Lehman Brothers; Bear Stearns; Wells Fargo;
+jpmorgan,2012,salomon,1994,Citibank; BankAmerica; Wells Fargo; Chase Manhattan; Merrill Lynch; Goldman Sachs; Lehman Brothers; Bear Ste
+jpmorgan,2012,fidelity,1990,Citibank; BankAmerica; WellsFargo; ChaseManhattan; MerrillLynch; GoldmanSachs; Lehman
+jpmorgan,2012,fidelity,1991,Citibank; Chase Manhattan; Bank of America; Wells Fargo; Barclays; HSBC; Deutsche Bank; Credit Suisse
+jpmorgan,2012,fidelity,1992,Citibank; Chase; Bank of America; Wells Fargo; Merrill Lynch; Goldman Sachs; Lehman Brothers; Morgan Stanley
+jpmorgan,2012,fidelity,1993,Goldman Sachs; Merrill Lynch; Citigroup; Lehman Brothers; Bear Stearns; Morgan Stanley; Wells Fargo;
+jpmorgan,2012,fidelity,1994,Citibank; BankAmerica; Wells Fargo; Chase Manhattan; Merrill Lynch; Goldman Sachs; Lehman Brothers; Bear Ste
+jpmorgan,2012,lehman,1990,chase; citibank; goldman sachs; merrill lynch; lehman brothers; bear st
+jpmorgan,2012,lehman,1991,Citibank; BankAmerica; Wells Fargo; Chase Manhattan; Barclays; HSBC; Deutsche Bank; Credit Suisse;
+jpmorgan,2012,lehman,1992,Citibank; BankAmerica; Wells Fargo; Chase Manhattan; Merrill Lynch; Goldman Sachs; Lehman Brothers; Barclays;
+jpmorgan,2012,lehman,1993,Citibank; Bankers Trust; Chase Manhattan; Wells Fargo; Merrill Lynch; Goldman Sachs; Lehman Brothers; Bank
+jpmorgan,2012,lehman,1994,Citibank; BankAmerica; Wells Fargo; Merrill Lynch; Goldman Sachs; Morgan Stanley; Lehman Brothers; Bear Ste
+yahoo,2008,microsoft,1990,barbarian; savage; lout; ruffian; boor; roughneck; thug; hooligan
+yahoo,2008,microsoft,1991,Internet Explorer; Netscape; WebCrawler; Lycos; AltaVista; Excite; Infoseek; AOL
+yahoo,2008,microsoft,1992,internet; web; browser; Netscape; AOL; Lycos; Excite; Altavista; MSN;
+yahoo,2008,microsoft,1993,AOL; Netscape; Compuserve; Geocities; Lycos; Excite; AltaVista; MS
+yahoo,2008,microsoft,1994,Google; AltaVista; Lycos; Excite; WebCrawler; Infoseek; HotBot; LookSmart
+yahoo,2008,ibm,1990,AOL; CompuServe; GeoCities; AltaVista; Prodigy; Lycos; Excite;
+yahoo,2008,ibm,1991,Google; AOL; MSN; AltaVista; Lycos; Excite; WebCrawler; Netscape;
+yahoo,2008,ibm,1992,Google; AltaVista; Excite; Lycos; WebCrawler; Netscape; Infoseek; AOL;
+yahoo,2008,ibm,1993,Google; AltaVista; Lycos; Excite; WebCrawler; Netscape; Infoseek; MSN
+yahoo,2008,ibm,1994,AOL; Netscape; Excite; Lycos; AltaVista; Infoseek; WebCrawler; M
+facebook,2012,microsoft,1990,AOL; CompuServe; Prodigy; BBS; Usenet; email; IRC; MySpace; Geo
+facebook,2012,microsoft,1991,myspace; friendster; compuserve; prodigy; geocities; irc; bulletin board system; usenet;
+facebook,2012,microsoft,1992,AOL; CompuServe; Prodigy; bulletin board system; GeoCities; MySpace; Usenet; IC
+facebook,2012,microsoft,1993,AOL; CompuServe; Prodigy; BBS; Internet forum; Usenet; GeoCities; IRC;
+facebook,2012,microsoft,1994,internet; world wide web; bulletin board system; compuserve; AOL; Prodigy; Geocities; email;
+facebook,2012,ibm,1990,CompuServe; Prodigy; BBS; Usenet; AOL; MySpace; IRC; bulletin board system;
+facebook,2012,ibm,1991,Prodigy; CompuServe; America Online; BBS; IRC; GEnie; Delphi; Usenet;
+facebook,2012,ibm,1992,Internet; Bulletin board system (BBS); Online forum; Usenet; CompuServe; America Online (AOL);
+facebook,2012,ibm,1993,internet; bulletin board system; Usenet; Prodigy; CompuServe; America Online; email; web forum;
+facebook,2012,ibm,1994,AOL; CompuServe; MSN; BBS; Prodigy; chatroom; Netscape; IRC;
+google,2012,microsoft,1990,search; browse; investigate; research; explore; surf; seek; sift; look up; query
+google,2012,microsoft,1991,search engine; internet search; web search; Yahoo; AltaVista; Lycos; Excite; WebCrawler
+google,2012,microsoft,1992,search; browse; research; surf; explore; investigate; seek; query; hunt; examine
+google,2012,microsoft,1993,search; browse; explore; find; research; lookup; seek; investigate; discover; surf
+google,2012,microsoft,1994,search; browse; explore; research; investigate; locate; find; seek; surf; query
+google,2012,ibm,1990,search; research; investigate; explore; probe; examine; browse; sift; study; scrutinize
+google,2012,ibm,1991,search; lookup; find; research; explore; inquire; browse; seek; hunt; investigate
+google,2012,ibm,1992,search; browse; explore; find; research; investigate; look up; seek; query; surf
+google,2012,ibm,1993,Yahoo; AltaVista; Lycos; Excite; WebCrawler; Infoseek; HotBot; LookSmart
+google,2012,ibm,1994,Yahoo; AltaVista; Lycos; WebCrawler; Excite; Infoseek; AOL; Netscape;
+google,2012,hewlettpackard,1990,search; browse; investigate; explore; research; find; seek; hunt; look up; discover
+google,2012,hewlettpackard,1991,search; browse; find; explore; research; seek; discover; look up; investigate; query
+google,2012,hewlettpackard,1992,search; browse; research; investigate; explore; find; seek; query; examine; discover
+google,2012,hewlettpackard,1993,Yahoo; Lycos; AltaVista; Excite; WebCrawler; Infoseek; HotBot; LookSmart
+google,2012,hewlettpackard,1994,internet; web; search engine; Yahoo; Netscape; Altavista; Lycos; Excite; Infoseek
+google,2012,compaq,1990,search; research; investigate; explore; browse; seek; probe; examine; hunt; query
+google,2012,compaq,1991,search; browse; investigate; explore; research; seek; find; query; examine; hunt
+google,2012,compaq,1992,search; browse; explore; investigate; research; web search; internet search; querying; find; sift
+google,2012,compaq,1993,search; browse; Altavista; WebCrawler; Lycos; Excite; Infoseek; Netscape;
+google,2012,compaq,1994,search; browse; explore; find; research; lookup; discover; investigate; query; examine
+itunes,2007,multimedia,1990,record store; music shop; cassette shop; CD store; Tower Records; Virgin Megastore; Sam Goody; HM
+itunes,2007,multimedia,1991,Napster; Winamp; RealPlayer; MusicMatch; CD Player; Walkman; Tower Records; MTV; Disc
+itunes,2007,multimedia,1992,Napster; Winamp; RealPlayer; LimeWire; CD Player; Walkman; Discman; MP3 Player
+itunes,2007,multimedia,1993,Napster; Winamp; RealPlayer; LimeWire; CD player; Walkman; stereo; Discman; MTV
+itunes,2007,multimedia,1994,Napster; RealPlayer; Winamp; MusicMatch Jukebox; QuickTime; Windows Media Player; MP3
+itunes,2007,disk,1990,record store; music shop; cassette shop; CD store; video store; Tower Records; HMV; Virgin Megastore
+itunes,2007,disk,1991,Napster; Winamp; RealPlayer; LimeWire; MP3; MusicMatch; Kazaa; CD player;
+itunes,2007,disk,1992,Napster; Winamp; RealPlayer; Windows Media Player; MP3.com; LimeWire; MusicMatch Juke
+itunes,2007,disk,1993,Napster; Winamp; RealPlayer; LimeWire; CD Player; Walkman; Tower Records; Virgin Megast
+itunes,2007,disk,1994,Napster; Winamp; RealPlayer; MusicMatch; MP3.com; LimeWire; Kazaa; Walkman
+itunes,2007,cdrom,1990,record store; music shop; cassette store; CD store; Tower Records; Virgin Megastore; HMV; music retailer
+itunes,2007,cdrom,1991,Tower Records; Virgin Megastore; Sam Goody; HMV; Blockbuster Music; Musicland; Warehouse Music;
+itunes,2007,cdrom,1992,Winamp; Napster; CD player; Walkman; Discman; Media Player; RealPlayer; QuickTime; stereo
+itunes,2007,cdrom,1993,Napster; Winamp; RealPlayer; MusicMatch; LimeWire; AudioGalaxy; Windows Media Player; MP
+itunes,2007,cdrom,1994,Napster; Winamp; RealPlayer; Windows Media Player; CD Player; Sony Walkman; Discman; MP
+napster,2001,multimedia,1990,pirate; bootleg; copy; dub; tape; record; share; mixtape; underground; unofficial
+napster,2001,multimedia,1991,compuserve; bbs; usenet; aol; prodigy; geocities; gopher; bulletin board system
+napster,2001,multimedia,1992,piracy; file-sharing; music; MP3; copyright; internet; sharing; CD; download; peer-to-peer
+napster,2001,multimedia,1993,compuserve; aol; prodigy; bbs; compuserve; geocities; altavista; l
+napster,2001,multimedia,1994,compuserve; aol; prodigy; bulletin board systems; gopher; irc; usenet; mirc;
+napster,2001,disk,1990,file sharing; peer-to-peer; MP3 sharing; music trading; LimeWire; copyright infringement; digital piracy; online music
+napster,2001,disk,1991,BBS; Usenet; FTP sites; shareware; bulletin board system; file sharing; IRC; newsgroups;
+napster,2001,disk,1992,compact disc; CD-ROM; cassette tape; floppy disk; VHS; diskette; Walkman; minidisc;
+napster,2001,disk,1993,WinMX; LimeWire; Kazaa; BearShare; Morpheus; Audiogalaxy; Hotline; G
+napster,2001,disk,1994,LimeWire; Kazaa; Gnutella; BitTorrent; Morpheus; eDonkey2000; Soul
+napster,2001,cdrom,1990,record store; music shop; cassette retailer; CD store; video rental; audio shop; vinyl shop; bookstore; electronics store
+napster,2001,cdrom,1991,pirate; bootleg; copy; underground; mixtape; tape trading; black market; unauthorized; sharing; illicit
+napster,2001,cdrom,1992,BBS; Usenet; IRC; file sharing; peer-to-peer; FTP sites; shareware; Gopher; modem
+napster,2001,cdrom,1993,file-sharing; peer-to-peer; mp3; music-sharing; LimeWire; Kazaa; download; piracy; WinMX
+napster,2001,cdrom,1994,Mosaic; Gopher; BBS; AltaVista; Usenet; Lycos; ARPANET; Info
+bluray,2009,film,1990,laserdisc; videodisc; CD-ROM; VHS; Betamax; video cassette; DVD; optical disc;
+bluray,2009,film,1991,laserdisc; VHS; videotape; Betamax; CD; DVD; video cassette; videodisc; optical
+bluray,2009,film,1992,LaserDisc; DVD; VHS; CD-ROM; VideoCD; Betamax; videocassette; MPEG;
+bluray,2009,film,1993,LaserDisc; DVD; VHS; CD-ROM; VideoCD; Betamax; cassette; multimedia; videotape;
+bluray,2009,film,1994,DVD; LaserDisc; VHS; CD-ROM; videotape; videodisc; Betamax; video cassette; multimedia
+bluray,2009,disk,1990,LaserDisc; VHS; Betamax; VideoCD; videotape; CD-ROM; DVD; floppy disk; cassette
+bluray,2009,disk,1991,laserdisc; videodisc; CD-ROM; VHS; Betamax; DVD; floppy disk; cassette; videot
+bluray,2009,disk,1992,LaserDisc; VideoCD; VHS; Betamax; DVD; CD-ROM; videocassette; Hi8
+bluray,2009,disk,1993,laserdisc; CD-ROM; videotape; DVD; VHS; Betamax; video disc; optical disc; cassette
+bluray,2009,disk,1994,laserdisc; DVD; VHS; videocassette; CD-ROM; videotape; Betamax; video disk
+dvd,1999,film,1990,VHS; video cassette; cassette tape; Betamax; VCR; videotape; laser disc; CD-ROM; floppy
+dvd,1999,film,1991,videotape; VHS; cassette; video cassette; CD-ROM; laserdisc; Betamax; video tape;
+dvd,1999,film,1992,VHS; LaserDisc; videocassette; Betamax; video tape; CD-ROM; cassette; floppy disk;
+dvd,1999,film,1993,laserdisc; VHS; videotape; CD-ROM; Betamax; video cassette; digital video; multimedia; cam
+dvd,1999,film,1994,VHS; LaserDisc; video cassette; CD-ROM; Betamax; videotape; floppy disk; compact disc; cassette
+dvd,1999,disk,1990,VHS; videotape; Betamax; video cassette; laser disc; CD-ROM; floppy disk; cassette tape; video
+dvd,1999,disk,1991,videotape; VHS; video cassette; laser disc; Betamax; video disc; video; CD-ROM; video
+dvd,1999,disk,1992,laserdisc; VHS; videodisc; CD-ROM; videotape; Betamax; video cassette; CD-I
+dvd,1999,disk,1993,laserdisc; VHS; videocassette; CD-ROM; Betamax; video tape; cassette; multimedia;
+dvd,1999,disk,1994,laserdisc; VHS; videotape; CD-ROM; video disc; Betamax; cassette; floppy disk; video
+mp3,2000,floppy,1990,cassette; CD; mixtape; tape; CD player; Walkman; stereo; VHS; phonograph;
+mp3,2000,floppy,1991,CD; cassette; audio tape; mixtape; compact disc; Walkman; stereo; album; record; music tape
+mp3,2000,floppy,1992,CD; cassette; mixtape; album; stereo; Walkman; tape; music; discman; radio
+mp3,2000,floppy,1993,CD; cassette; tape; discman; Walkman; stereo; audio; music player; compact disc; album
+mp3,2000,floppy,1994,audio file; digital audio; MPEG audio; music file; sound file; WAV file; computer file; multimedia file; digital
+mp3,2000,disk,1990,cassette; CD; mixtape; Walkman; tape; compact disc; audiocassette; album; stereo
+mp3,2000,disk,1991,CD; cassette; audio tape; tape; CD player; Walkman; stereo; music player; discman; album
+mp3,2000,disk,1992,audio cassette; cassette tape; compact disc; CD; mixtape; Walkman; music tape; tape; DAT; stereo
+mp3,2000,disk,1993,audio file; music file; digital audio; WAV; MIDI; sound file; multimedia file; digital format; audio format;
+mp3,2000,disk,1994,audio file; digital audio; music file; sound file; MPEG audio; audio format; .wav; .aiff;
+mp3,2000,cassette,1990,cassette; CD; discman; Walkman; tape; CD player; stereo; boombox; audio tape;
+mp3,2000,cassette,1991,CD; cassette; audio tape; compact disc; mixtape; video tape; tape deck; Walkman; laser disc;
+mp3,2000,cassette,1992,audio cassette; cassette tape; compact cassette; tape; audio tape; music cassette; cassette deck; stereo cassette; cassette player
+mp3,2000,cassette,1993,audio cassette; compact disc; CD; cassette tape; Walkman; tape; audio tape; mixtape; CD player;
+mp3,2000,cassette,1994,CD; cassette; audio tape; DAT; minidisc; videotape; floppy disk; CD-ROM; VHS;
+pdf,2014,copy,1990,document; file; manual; text; report; guide; booklet; pamphlet; brochure; paperwork
+pdf,2014,copy,1991,document; file; format; Adobe; printable; digital; text; Portable Document Format; reader; electronic
+pdf,2014,copy,1992,document; file; manual; booklet; report; guide; text; publication; pamphlet; brochure
+pdf,2014,copy,1993,document; file; report; manual; newsletter; booklet; brochure; guide; dossier; text
+pdf,2014,copy,1994,document; file; format; Adobe; portable; electronic document; report; manual; guide; text
+pdf,2014,printing,1990,document; file; report; manual; text; guide; booklet; pamphlet; paper; publication
+pdf,2014,printing,1991,document; file; manual; report; booklet; guide; text; form; brochure; paperwork
+pdf,2014,printing,1992,document; file; manual; report; text; guide; booklet; handbook; paper; form
+pdf,2014,printing,1993,document; file; report; manual; booklet; guide; text; form; paper; pamphlet
+pdf,2014,printing,1994,document; file; Adobe; Acrobat; portable; format; electronic; digital; ebook; manual
+website,2014,addresses,1990,webpage; internet site; home page; site; web address; URL; domain; online service; bulletin board system;
+website,2014,addresses,1991,internet site; webpage; web page; online service; bulletin board system; cyberspace; electronic bulletin board; information system
+website,2014,addresses,1992,webpage; site; homepage; URL; portal; web; internet site; hypermedia; information system; online service
+website,2014,addresses,1993,webpage; site; homepage; web; internet site; URL; online portal; HTML page; domain; web address
+website,2014,addresses,1994,webpage; homepage; site; URL; web; internet site; domain; online service; web address; portal
+myspace,2007,publications,1990,AOL; CompuServe; Prodigy; BBS; GeoCities; IRC; Usenet; dial-up;
+myspace,2007,publications,1991,Prodigy; AOL; CompuServe; BBS; Usenet; IRC; Geocities; ICQ; MSN
+myspace,2007,publications,1992,AOL; CompuServe; Prodigy; BBS; GeoCities; Usenet; ICQ; Internet Relay
+myspace,2007,publications,1993,AOL; CompuServe; GeoCities; Prodigy; BBS; Angelfire; Tripod; Us
+myspace,2007,publications,1994,GeoCities; AOL; Angelfire; Tripod; CompuServe; MSN; Yahoo; Prodigy;
+myspace,2007,messaging,1990,AOL; CompuServe; Prodigy; BBS; GeoCities; ICQ; Bulletin Board System; America
+myspace,2007,messaging,1991,geocities; compuserve; aol; prodigy; angelfire; netscape; bbs; icq
+myspace,2007,messaging,1992,GeoCities; AOL; CompuServe; Prodigy; BBS; MSN; IRC; Usenet; Ang
+myspace,2007,messaging,1993,AOL; Compuserve; BBS; Prodigy; Geocities; IRC; Usenet; Email; World
+myspace,2007,messaging,1994,GeoCities; AOL; Compuserve; Angelfire; Tripod; Prodigy; Netscape; WebC
+blogger,2011,journalist,1990,journalist; columnist; reporter; writer; correspondent; diarist; commentator; author; essayist; editor
+blogger,2011,journalist,1991,journalist; columnist; reporter; correspondent; writer; diarist; commentator; editor; author; freelancer
+blogger,2011,journalist,1992,writer; journalist; columnist; correspondent; reporter; author; commentator; diarist; essayist; critic
+blogger,2011,journalist,1993,journalist; columnist; reporter; correspondent; writer; commentator; editor; author; diarist; contributor
+blogger,2011,journalist,1994,webmaster; online diarist; web author; internet writer; cyber journalist; site creator; web editor; online writer
+blogger,2011,columnist,1990,journalist; writer; correspondent; columnist; reporter; author; commentator; editor; newsman; diarist
+blogger,2011,columnist,1991,writer; columnist; journalist; correspondent; reporter; author; commentor; diarist; contributor; editor
+blogger,2011,columnist,1992,journalist; writer; columnist; reporter; correspondent; diarist; editor; author; commentator; essayist
+blogger,2011,columnist,1993,journalist; columnist; reporter; writer; correspondent; diarist; commentator; editor; author; newsman
+blogger,2011,columnist,1994,webmaster; online diarist; internet writer; web author; cyberscribe; net journalist; digital columnist; electronic
+blogger,2011,editor,1990,journalist; columnist; reporter; correspondent; writer; editor; commentator; author; diarist; newsman
+blogger,2011,editor,1991,writer; journalist; columnist; correspondent; diarist; reporter; author; commentator; editor; freelancer
+blogger,2011,editor,1992,writer; journalist; columnist; correspondent; diarist; author; reporter; commentator; critic; essayist
+blogger,2011,editor,1993,journalist; columnist; correspondent; writer; reporter; commentator; author; critic; diarist; editor
+blogger,2011,editor,1994,journalist; writer; columnist; reporter; correspondent; author; editor; commentator; diarist; newsman
+blog,2011,article,1990,journal; diary; column; newsletter; bulletin; article; series; commentary; log; record
+blog,2011,article,1991,journal; diary; newsletter; column; bulletin; gazette; chronicle; log; dispatch; report
+blog,2011,article,1992,journal; diary; column; newsletter; gazette; bulletin; log; report; update; dispatch
+blog,2011,article,1993,website; online journal; web page; internet site; news group; e-zine; bulletin board; forum; compuser
+blog,2011,article,1994,webzine; online diary; e-zine; cyberspace publication; internet newsletter; online journal; electronic magazine;
+blog,2011,newspaper,1990,journal; diary; newsletter; column; bulletin; article; log; discourse; gazette; record
+blog,2011,newspaper,1991,diary; journal; newsletter; bulletin; column; log; report; gazette; chronicle; record
+blog,2011,newspaper,1992,journal; diary; column; newsletter; bulletin; log; record; gazette; dispatch; commentary
+blog,2011,newspaper,1993,online diary; journal; web diary; e-journal; personal website; zine; newsletter; bulletin board; usenet
+blog,2011,newspaper,1994,online journal; web diary; internet journal; digital diary; personal website; web log; online diary; electronic journal; internet
+ecommerce,2000,market,1990,mail-order business; catalog shopping; teleshopping; direct sales; home shopping; distance selling; phone orders; electronic shopping
+ecommerce,2000,market,1991,mail-order; catalog shopping; teleshopping; home shopping; direct sales; telephone shopping; electronic retailing; TV shopping
+ecommerce,2000,market,1992,mail-order; teleshopping; catalog shopping; phone shopping; electronic shopping; remote shopping; computer shopping; online shopping;
+ecommerce,2000,market,1993,online shopping; electronic retailing; e-business; internet sales; digital marketplace; virtual store; web store; online trade;
+ecommerce,2000,market,1994,online shopping; electronic shopping; internet shopping; online trade; electronic commerce; internet sales; online business; web shopping; web
+smartphone,2015,computer,1990,cellphone; mobile phone; portable phone; car phone; handheld phone; mobile device; personal digital assistant; pocket computer;
+smartphone,2015,computer,1991,cellular phone; mobile phone; portable phone; car phone; pager; personal digital assistant; handheld device; laptop; electronic
+smartphone,2015,computer,1992,cellphone; mobile phone; PDA; cellular phone; portable phone; handheld device; digital assistant; mobile device; pocket
+smartphone,2015,computer,1993,cellphone; PDA; mobile phone; handheld computer; digital assistant; portable phone; cellular phone; pocket computer; electronic
+smartphone,2015,computer,1994,cellphone; PDA; mobile phone; pager; laptop; handheld; computer; communicator; portable phone; electronic organizer
+wifi,2013,cellular,1990,internet; modem; Ethernet; network; broadband; digital; wireless; connectivity; telecommunication; data
+wifi,2013,cellular,1991,internet; modem; ethernet; network; broadband; dial-up; ISDN; TCP/IP; online; connectivity
+wifi,2013,cellular,1992,internet; wireless; modem; ethernet; broadband; network; connectivity; online; dial-up; cyberspace
+wifi,2013,cellular,1993,internet; wireless; modem; ethernet; LAN; broadband; dial-up; TCP/IP; network; ISDN
+wifi,2013,cellular,1994,internet; wireless; modem; ethernet; network; broadband; telecommunications; data transmission; online; connectivity
+wifi,2013,wireless,1990,internet; modem; ethernet; network; telecommunications; wireless; broadband; dial-up; ISDN; BBS
+wifi,2013,wireless,1991,internet; modem; ethernet; dial-up; ISDN; network; broadband; online; connectivity; wireless
+wifi,2013,wireless,1992,wireless; internet; modem; broadband; network; ethernet; telecommunications; connectivity; dial-up; ISDN
+wifi,2013,wireless,1993,internet; wireless; modem; Ethernet; broadband; network; online; connectivity; telecommunication; data transmission
+wifi,2013,wireless,1994,internet; ethernet; modem; broadband; ISDN; network; dial-up; connectivity; online; data communications
+wifi,2013,fax,1990,internet; modem; ethernet; DSL; broadband; telecommunications; network; online; wireless communication; digital communication
+wifi,2013,fax,1991,internet; modem; ethernet; broadband; network; wireless; connectivity; dial-up; telecommunication; data transmission
+wifi,2013,fax,1992,internet; modem; dial-up; ethernet; broadband; TCP/IP; network; online; connectivity; ISDN
+wifi,2013,fax,1993,internet; wireless; modem; ethernet; network; broadband; connectivity; LAN; telecommunications; ISDN
+wifi,2013,fax,1994,internet; wireless; networks; ethernet; connectivity; modem; broadband; radio; telecommunication; ISDN
+bitcoin,2015,investment,1990,digital cash; e-cash; electronic money; cybercurrency; online currency; digital currency; digicash; internet money
+bitcoin,2015,investment,1991,digital currency; cryptocurrency; e-money; cybercash; electronic cash; virtual currency; e-currency; digital money; electronic
+bitcoin,2015,investment,1992,digital cash; e-cash; digital currency; electronic money; cybercash; virtual currency; digital money; electronic currency;
+bitcoin,2015,investment,1993,cybercash; e-cash; digicash; electronic money; virtual currency; digital currency; online payment; internet
+bitcoin,2015,investment,1994,internet; cyberspace; digital; web; online; ecommerce; cyber; virtual; network; encryption
+skype,2009,telephone,1990,telephone; fax; telegraph; pager; modem; teleconference; videoconference; mobile; voicemail; email
+skype,2009,telephone,1991,videophone; videoconference; video call; teleconference; chat; modem; online communication; multimedia; remote meeting; internet
+skype,2009,telephone,1992,videoconference; teleconference; chat; ICQ; MSN Messenger; dial-up; modem; internet call; webcam;
+skype,2009,telephone,1993,AOL; CompuServe; MSN; ICQ; Prodigy; BBS; IRC; chatroom;
+skype,2009,telephone,1994,email; fax; pager; telephone; voicemail; modem; teleconference; videoconference; cellular; messaging
+ipad,2012,laptop,1990,tablet computer; personal digital assistant; laptop; notebook computer; handheld PC; portable computer; electronic organizer; pocket computer; pal
+ipad,2012,laptop,1991,personal computer; laptop; notebook; Apple Macintosh; computer; desktop; PowerBook; Mac; PC; portable computer
+ipad,2012,laptop,1992,tablet computer; laptop; personal digital assistant; computer; Newton MessagePad; PowerBook; electronic organizer; portable computer; multimedia
+ipad,2012,laptop,1993,Newton MessagePad; Apple Newton; PDA; personal digital assistant; Palm Pilot; Psion Organizer; Handheld PC;
+ipad,2012,laptop,1994,PDA; Newton MessagePad; handheld computer; portable computer; electronic organizer; laptop; notebook computer; Palm Pilot; touchscreen
+ipad,2012,computer,1990,computer; laptop; notebook; PC; Macintosh; portable computer; personal computer; desktop; workstation; electronic organizer
+ipad,2012,computer,1991,tablet computer; personal digital assistant; portable computer; laptop; handheld PC; electronic organizer; Newton; Palm Pilot; portable media
+ipad,2012,computer,1992,tablet computer; personal digital assistant; Newton; Palm Pilot; electronic organizer; handheld computer; portable computer; Apple Newton; laptop
+ipad,2012,computer,1993,personal computer; laptop; notebook; computer; Macintosh; portable computer; desktop; PC; electronic organizer; handheld computer
+ipad,2012,computer,1994,Newton MessagePad; Apple Newton; PDA; Palm Pilot; electronic organizer; handheld computer; personal digital assistant; Pocket PC
+ipod,2004,cdrom,1990,Walkman; Discman; stereo; boombox; cassette player; radio; CD player; portable music player; Sony Walk
+ipod,2004,cdrom,1991,walkman; portable cd player; discman; boombox; cassette player; stereo; personal stereo; minidisc player
+ipod,2004,cdrom,1992,Walkman; Discman; cassette player; boombox; portable stereo; CD player; stereo system; radio; tape player
+ipod,2004,cdrom,1993,Walkman; Discman; portable CD player; portable cassette player; stereo; boombox; personal stereo; MP3 player
+ipod,2004,cdrom,1994,Walkman; Discman; portable CD player; cassette player; boombox; stereo; MiniDisc player; radio; portable
+app,2012,software,1990,software; program; application; tool; utility; system; software package; platform; suite; interface
+app,2012,software,1991,software; program; application; shareware; utility; diskette; suite; freeware; toolkit; platform
+app,2012,software,1992,software; program; application; tool; utility; software package; computer program; platform; system; software application
+app,2012,software,1993,software; program; application; tool; utility; software package; computer program; suite; platform; system
+app,2012,software,1994,program; software; application; tool; utility; system; platform; suite; package; solution
+cellphone,2007,telephone,1990,mobile phone; portable phone; car phone; cordless phone; pager; telephone; walkie-talkie; handheld radio;
+cellphone,2007,telephone,1991,mobile phone; car phone; pager; cellular phone; portable phone; cordless phone; telephone; mobile; handheld phone;
+cellphone,2007,telephone,1992,mobile phone; cellular phone; car phone; portable phone; cordless phone; pager; telephone; personal communicator; handheld;
+cellphone,2007,telephone,1993,mobile phone; cellular phone; car phone; portable phone; mobile; cellular; handset; wireless phone; cellular telephone; mobile
+cellphone,2007,telephone,1994,mobile phone; cellular phone; portable phone; car phone; cordless phone; pager; mobile; handheld; telephone; wireless
+cellphone,2007,phone,1990,mobile phone; car phone; portable phone; cellular phone; cordless phone; handheld phone; mobile; pager; walkie
+cellphone,2007,phone,1991,mobile phone; cellular phone; car phone; portable phone; wireless phone; mobile device; personal communicator; handheld phone; digital
+cellphone,2007,phone,1992,mobile phone; portable phone; cellular phone; car phone; cell phone; mobile; wireless phone; handset; mobile device;
+cellphone,2007,phone,1993,mobile phone; cellular phone; portable phone; car phone; cordless phone; mobile; cellular; handset; wireless phone;
+cellphone,2007,phone,1994,mobile phone; portable phone; cellular phone; car phone; cordless phone; pager; mobile; handheld phone; wireless phone
+email,2015,letter,1990,electronic mail; fax; letter; correspondence; memo; telex; communication; message; telegram; bulletin
+email,2015,letter,1991,electronic mail; fax; letter; correspondence; telex; memo; communication; message; telecommunication; pager
+email,2015,letter,1992,electronic mail; e-mail; fax; telefax; facsimile; computer communication; electronic communication; online messaging;
+email,2015,letter,1993,electronic mail; fax; correspondence; telecommunication; memo; message; telex; communication; letter; bulletin
+email,2015,letter,1994,electronic mail; email; e-mail; internet mail; electronic message; electronic communication; online message; digital communication; computer
+tweet,2012,column,1990,telegraph; fax; bulletin; dispatch; update; newsletter; message; note; report; announcement
+tweet,2012,column,1991,post; message; update; broadcast; share; publish; announce; report; inform; communicate
+tweet,2012,column,1992,telegram; fax; message; telex; memo; note; communication; dispatch; missive; bulletin
+tweet,2012,column,1993,post; message; update; bulletin; note; announcement; notification; memo; news; information
+tweet,2012,column,1994,post; message; update; bulletin; announcement; note; news; report; comment; dispatch
+tweet,2012,article,1990,message; note; post; update; bulletin; announcement; news; report; comment; dispatch
+tweet,2012,article,1991,message; fax; telegraph; note; memo; bulletin; notice; update; communication; report
+tweet,2012,article,1992,post; message; update; bulletin; note; announcement; news; broadcast; comment; report
+tweet,2012,article,1993,fax; email; page; telex; message; correspondence; memo; telegraph; communiqué; note
+tweet,2012,article,1994,broadcast; message; post; update; announcement; news; report; communication; note; bulletin
+youtube,2014,tv,1990,MTV; cable TV; video rentals; VHS; Blockbuster; television; public access TV; VH1; broadcast
+youtube,2014,tv,1991,MTV; VH1; video cassette recorder; cable television; Blockbuster; public-access TV; camcorder; Bet
+youtube,2014,tv,1992,MTV; VH1; CNN; BBC; NBC; CBS; ABC; ESPN; HBO; Fox
+youtube,2014,tv,1993,MTV; video rental; Blockbuster; VHS; television; cable TV; Netscape; America Online; public access
+youtube,2014,tv,1994,MTV; VH1; CNN; NBC; BBC; CBS; ABC; Fox; ESPN; HBO
+youtube,2014,cable,1990,MTV; VHS; television; video; Cable TV; broadcast; media; Betamax; cassette; channel
+youtube,2014,cable,1991,MTV; VH1; CNN; BBC; NBC; CBS; ABC; VHS; cassette; television
+youtube,2014,cable,1992,MTV; VH1; CNN; Nickelodeon; ESPN; HBO; PBS; BBC; CBS; ABC
+youtube,2014,cable,1993,MTV; VH1; CNN; ESPN; BBC; NBC; CBS; Fox; HBO; Nickelodeon
+youtube,2014,cable,1994,MTV; VH1; CNN; HBO; ESPN; BBC; NBC; CBS; ABC; Fox
+zika,2016,malaria,1990,AIDS; HIV; Ebola; Hepatitis; Malaria; Dengue; Influenza; Cholera;
+zika,2016,malaria,1991,ebola; hiv; aids; cholera; dengue; hepatitis; malaria; tuberculosis; influenza; sars
+zika,2016,malaria,1992,ebola; hiv; aids; cholera; hepatitis; malaria; dengue; measles; tuberculosis; lyme
+zika,2016,malaria,1993,ebola; hantavirus; cholera; dengue; malaria; hepatitis; legionnaires; lyme; ty
+zika,2016,malaria,1994,ebola; hantavirus; plague; cholera; dengue; lassa; malaria; influenza; typh
+ebola,2015,malaria,1990,AIDS; HIV; influenza; epidemic; contagion; plague; virus; malaria; tuberculosis; cholera
+ebola,2015,malaria,1991,HIV; AIDS; epidemic; virus; infectious disease; virology; pandemic; H1N1; zoon
+ebola,2015,malaria,1992,AIDS; HIV; epidemic; outbreak; virus; infectious; plague; pandemic; contagion; disease
+ebola,2015,malaria,1993,HIV; AIDS; epidemic; infectious disease; virus; contagion; plague; outbreak; pandemic; health crisis
+ebola,2015,malaria,1994,HIV; AIDS; plague; cholera; typhus; tuberculosis; malaria; dengue; influenza; hepatitis
+sars,2003,tuberculosis,1990,HIV; AIDS; epidemic; influenza; virus; contagion; pandemic; tuberculosis; hepatitis; plague
+sars,2003,tuberculosis,1991,hiv; aids; epidemic; influenza; virus; ebola; pandemic; infection; disease; outbreak
+sars,2003,tuberculosis,1992,hiv; aids; epidemic; influenza; virus; contagion; pandemic; outbreak; infection; disease
+sars,2003,tuberculosis,1993,hantavirus; ebola; influenza; HIV; dengue; cholera; measles; hepatitis; malaria; ty
+sars,2003,tuberculosis,1994,hiv; aids; epidemic; virus; influenza; pandemic; ebola; outbreak; contagion; plague
+subprime,2007,defaults,1990,junk bonds; high-risk; speculative; low-grade; non-investment; risky; distressed; default; poor credit;
+subprime,2007,defaults,1991,junk bonds; risky loans; high-risk investments; speculative; low-grade bonds; unsecured debt; financial instability; credit
+subprime,2007,defaults,1992,junk; risky; speculative; high-risk; non-investment; low-grade; insecure; uncertain; unstable; underperform
+subprime,2007,defaults,1993,risky; unsecured; high-risk; speculative; nonprime; low-quality; junk; precarious; hazardous; uncertain
+subprime,2007,defaults,1994,junk; high-risk; speculative; non-investment-grade; risky; default; distressed; low-quality; hazardous; precarious
+subprime,2007,junk,1990,junk; high-risk; speculative; non-investment; risky; unsecured; second-class; low-grade; inferior;
+subprime,2007,junk,1991,junk bond; risky; high-risk; speculative; non-investment; default; distressed; low-grade; uncertain; volatile
+subprime,2007,junk,1992,junk; risky; speculative; high-risk; low-grade; non-investment; precarious; unstable; shaky; vulnerable
+subprime,2007,junk,1993,risky; unstable; speculative; uncertain; unsecured; high-risk; precarious; unreliable; vulnerable; hazardous
+subprime,2007,junk,1994,junk; risky; high-risk; speculative; unsound; insecure; precarious; questionable; unstable; hazardous
+subprime,2007,bond,1990,junk; high-risk; speculative; non-investment; risky; low-grade; high-yield; marginal; insecure;
+subprime,2007,bond,1991,junk bond; risky investment; high-yield bond; speculative; low-grade; non-investment grade bond; credit risk
+subprime,2007,bond,1992,junk; speculative; high-risk; non-standard; risky; low-grade; second-tier; non-investment; marginal;
+subprime,2007,bond,1993,junk; high-risk; speculative; risky; low-grade; non-investment-grade; underperforming; low-quality;
+subprime,2007,bond,1994,junk; high-risk; speculative; low-grade; risky; non-investment; distressed; poor-quality; default-risk;
+laden,2001,saddam,1990,burdened; loaded; heavy; weighted; filled; charged; packed; encumbered; freighted; saturated
+laden,2001,saddam,1991,burdened; loaded; heavy; filled; weighed; encumbered; overloaded; packed; freighted; saturated
+laden,2001,saddam,1992,burdened; loaded; weighed down; heavy; encumbered; fraught; filled; burden; charged; full
+laden,2001,saddam,1993,burdened; loaded; heavy; encumbered; weighted; freighted; filled; charged; overburdened
+laden,2001,saddam,1994,burdened; loaded; filled; heavy; weighted; encumbered; charged; freighted; full; packed
+lewinsky,1998,affair,1990,Linda Tripp; Anita Hill; Clarence Thomas; Gennifer Flowers; Paula Jones; political scandal; White House intern;
+lewinsky,1998,affair,1991,gennifer flowers; paula jones; anita hill; tammy wynette; hillary clinton; fawn
+lewinsky,1998,affair,1992,Monica; scandal; impeachment; Clinton; affair; White House; intern; political; media; controversy
+lewinsky,1998,affair,1993,Monica; scandal; affair; intern; White House; Clinton; impeachment; political scandal; controversy; media frenzy
+lewinsky,1998,affair,1994,Monica; scandal; affair; Clinton; intern; White House; controversy; political scandal; impeachment; media frenzy
+qaeda,2002,iraq,1990,militant; guerrilla; radical; extremist; terrorist; insurgency; faction; cell; network; rebel
+qaeda,2002,iraq,1991,terrorism; extremists; mujahideen; radicals; insurgents; terror; guerrillas; jihad; fundamentalists; militants
+qaeda,2002,iraq,1992,mujahideen; guerrillas; insurgents; militants; jihad; fighters; radicals; extremists; rebels; terrorism
+qaeda,2002,iraq,1993,militant; extremist; terrorist; radical; guerrilla; fundamentalist; jihadist; insurgent; faction; cell
+qaeda,2002,iraq,1994,militia; guerrilla; insurgents; rebels; faction; paramilitary; separatists; jihadists; terrorist; radicals
+euro,2012,currency,1990,ECU; European Currency Unit; Franc; Deutsche Mark; Peseta; Guilder; Lira; Pound Sterling; Kron
+euro,2012,currency,1991,ECU; European Currency Unit; Maastricht Treaty; EMS; European Monetary System; EU currency; Euro currency;
+euro,2012,currency,1992,ECU; Maastricht; EMS; ERM; Schengen; peseta; franc; deutsche mark;
+euro,2012,currency,1993,ECU; European Currency Unit; Maastricht Treaty; European Community; EU; European Union; franc; deutschmark
+euro,2012,currency,1994,ECU; European Currency Unit; Maastricht Treaty; European Union; EU currency; European Community; convergence criteria;
+tsarnaev,2013,gunman,1990,McVeigh; Kaczynski; Rudolph; Yousef; Nichols; Abdel-Rahman; Salame
+tsarnaev,2013,gunman,1991,McVeigh; Kaczynski; Rudolph; Nichols; Yousef; Ramirez; Dahmer; Manson;
+tsarnaev,2013,gunman,1992,McVeigh; Rudolph; Kaczynski; Yousef; Nichols; Weaver; Rajneesh; Sal
+tsarnaev,2013,gunman,1993,Kaczynski; McVeigh; Rudolph; Yousef; Nichols; Ramzi; Fortier; Mur
+tsarnaev,2013,gunman,1994,Kaczynski; Rudolph; McVeigh; Nichols; Yousef; Ramzi; Murrah; World
